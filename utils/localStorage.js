@@ -1,18 +1,18 @@
-const setToLocalStorage = (key, value) => {
+export const setToLocalStorage = (key, value) => {
   if (!key || typeof window === "undefined") {
     return "";
   }
   return localStorage.setItem(key, value);
 };
 
-const getFromLocalStorage = (key) => {
+export const getFromLocalStorage = (key) => {
   if (!key || typeof window === "undefined") {
     return "";
   }
   return localStorage.getItem(key);
 };
 
-const removeFromLocalStorage = (key) => {
+export const removeFromLocalStorage = (key) => {
   if (!key || typeof window === "undefined") {
     return "";
   }
