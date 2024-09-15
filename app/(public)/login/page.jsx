@@ -28,7 +28,7 @@ export default function Login() {
         <div className="hidden lg:block w-7/12">
           <Image src={loginIllustration} alt="telehealth login" />
         </div>
-        <div className="lg:w-5/12">
+        <div className="max-xs:w-full xs:w-6/12 lg:w-5/12">
           <p className="mb-5 max-lg:text-center max-lg:mt-10 lg:mb-8 font-semibold text-2xl md:text-3xl">
             Sign in to your account
           </p>
