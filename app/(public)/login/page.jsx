@@ -3,7 +3,6 @@
 import Image from "next/image";
 import loginIllustration from "@/public/image/login-illustration.png";
 import Container from "@/components/shared/Container";
-import PublicNavbar from "@/components/public/Navbar";
 import { Button, Input } from "antd";
 import { useFormik } from "formik";
 import * as Yup from "yup";
