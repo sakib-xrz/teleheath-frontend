@@ -11,6 +11,7 @@ const themeConfig = {
     Button: {
       defaultShadow: "",
       primaryShadow: "",
+      fontWeight: 600,
       algorithm: true,
     },
     Dropdown: {
@@ -49,6 +50,9 @@ const themeConfig = {
       colorBgSpotlight: "rgb(15,118,110)",
       fontSize: 16,
       algorithm: true,
+    },
+    Form: {
+      itemMarginBottom: 16,
     },
   },
 };
