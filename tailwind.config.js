@@ -10,9 +10,9 @@ module.exports = {
       colors: {
         primary: "#0f766e",
         danger: "#E50000",
-        base: "#111827",
-        "base-500": "#6b7280",
-        "base-300": "#d1d5db",
+        "dark-900": "#111827",
+        "dark-500": "#6b7280",
+        "dark-300": "#d1d5db",
         light: "#F9FAFB",
       },
       screens: {

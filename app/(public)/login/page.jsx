@@ -6,36 +6,28 @@ import Container from "@/components/shared/Container";
 import { Button, Input } from "antd";
 import Label from "@/components/shared/Label";
 import Link from "next/link";
-import { z } from "zod";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import FormikErrorBox from "@/components/shared/FormikErrorBox";
 
 export default function Login() {
-  const loginSchema = z.object({
-    email: z
-      .string({
-        required_error: "Email is required",
-      })
-      .email("Invalid email address"),
-    password: z
-      .string({
-        required_error: "Password is required",
-      })
-      .min(6, "Password must be at least 6 characters"),
+  const loginSchema = Yup.object({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
   });
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
+  const formik = useFormik({
+    initialValues: {
       email: "",
       password: "",
     },
-    resolver: zodResolver(loginSchema),
+    validationSchema: loginSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
   });
-  const onSubmit = (data) => console.log(data);
 
   return (
     <Container className="py-0 lg:py-0">
@@ -47,39 +39,29 @@ export default function Login() {
           <p className="mb-5 text-2xl font-semibold max-lg:mt-10 max-lg:text-center md:text-3xl lg:mb-8">
             Sign in to your account
           </p>
-          <form
-            className="space-y-5 lg:mr-14"
-            onSubmit={handleSubmit(onSubmit)}
-          >
+          <form className="space-y-5 lg:mr-14" onSubmit={formik.handleSubmit}>
             <div className="space-y-2">
               <div className="space-y-1">
                 <Label htmlFor="email" required>
                   Email
                 </Label>
-                <Controller
+                <Input
                   name="email"
-                  control={control}
-                  render={({ field }) => (
-                    <Input {...field} placeholder="Enter your email" />
-                  )}
+                  placeholder="Enter your email"
+                  {...formik.getFieldProps("email")}
                 />
-                <p className="text-red-500">{errors.email?.message}</p>
+                <FormikErrorBox formik={formik} name="email" />
               </div>
               <div className="space-y-1">
                 <Label htmlFor="password" required>
                   Password
                 </Label>
-                <Controller
+                <Input.Password
                   name="password"
-                  control={control}
-                  render={({ field }) => (
-                    <Input.Password
-                      {...field}
-                      placeholder="Enter your password"
-                    />
-                  )}
+                  placeholder="Enter your password"
+                  {...formik.getFieldProps("password")}
                 />
-                <p className="text-red-500">{errors.password?.message}</p>
+                <FormikErrorBox formik={formik} name="password" />
                 <div className="text-right">
                   <Link
                     href="/forgot-password"
