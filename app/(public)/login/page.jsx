@@ -24,12 +24,12 @@ export default function Login() {
   });
   return (
     <Container className="py-0 lg:py-0">
-      <div className="lg:min-h-[calc(100vh-80px)] flex lg:items-center justify-evenly gap-5 text-base">
-        <div className="hidden lg:block w-7/12">
+      <div className="flex justify-evenly gap-5 text-base lg:min-h-[calc(100vh-80px)] lg:items-center">
+        <div className="hidden w-7/12 lg:block">
           <Image src={loginIllustration} alt="telehealth login" />
         </div>
         <div className="max-xs:w-full xs:w-6/12 lg:w-5/12">
-          <p className="mb-5 max-lg:text-center max-lg:mt-10 lg:mb-8 font-semibold text-2xl md:text-3xl">
+          <p className="mb-5 text-2xl font-semibold max-lg:mt-10 max-lg:text-center md:text-3xl lg:mb-8">
             Sign in to your account
           </p>
           <form className="space-y-5 lg:mr-14">
@@ -56,7 +56,7 @@ export default function Login() {
                 <div className="text-right">
                   <Link
                     href="/forgot-password"
-                    className="text-sm text-primary font-medium text-right hover:underline"
+                    className="text-right text-sm font-medium text-primary hover:underline"
                   >
                     Forgot password?
                   </Link>
@@ -68,7 +68,7 @@ export default function Login() {
             </Button>
           </form>
 
-          <div className="mt-5 text-center">
+          <div className="mt-5 text-center lg:mr-14">
             <p>{`Don't have an account?`} </p>
             <Link href="/register">
               <Button type="link" className="text-primary">
