@@ -1,13 +1,5 @@
-import GlobalProvider from "./_components/GlobalProvider";
+import GlobalProvider from "@/components/shared/GlobalProvider";
 import "./globals.css";
-
-import { Montserrat } from "next/font/google";
-
-const montserrat = Montserrat({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata = {
   title: "Telehealth",
@@ -18,7 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} antialiased`}>
+      <body className={"antialiased"}>
         <GlobalProvider>{children}</GlobalProvider>
       </body>
     </html>

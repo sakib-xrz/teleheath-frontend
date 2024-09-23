@@ -18,6 +18,8 @@ const themeConfig = {
       fontSize: 16,
       fontSizeIcon: 16,
       algorithm: true,
+      controlItemBgActive: "rgb(15,118,110)",
+      controlItemBgHover: "rgba(15,118,109,0.1)",
     },
     Menu: {
       horizontalItemSelectedColor: "rgb(15,118,110)",
@@ -43,12 +45,20 @@ const themeConfig = {
     Select: {
       optionSelectedBg: "rgb(15,118,110)",
       optionSelectedColor: "rgba(255,255,255,0.88)",
-      algorithm: true,
     },
     Tooltip: {
       colorBgSpotlight: "rgb(15,118,110)",
       fontSize: 16,
-      algorithm: true,
+    },
+    Form: {
+      itemMarginBottom: 12,
+    },
+    Input: {
+      colorBorder: "rgb(188,188,188)",
+      activeBorderColor: "rgb(15,118,110)",
+      hoverBorderColor: "rgb(15,118,110)",
+      lineWidth: 2,
+      activeShadow: "0 0 0 2px rgba(15, 118, 110, 0.3)",
     },
   },
 };
