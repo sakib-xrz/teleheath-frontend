@@ -66,6 +66,8 @@ axiosInstance.interceptors.response.use(
         // Handle any errors during token refresh
         return Promise.reject(tokenRefreshError);
       }
+    } else if (error?.response?.status === 403) {
+      window.location.href = "/login";
     }
 
     // General error handling if it's not a token expiration issue
