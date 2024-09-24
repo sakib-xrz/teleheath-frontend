@@ -14,8 +14,6 @@ const userLogin = async (payload) => {
       },
     );
 
-    console.log(response);
-
     if (response?.statusCode === 200) {
       const { accessToken, needPasswordChange } = response?.data || {};
 
