@@ -7,21 +7,21 @@ import { Button } from "antd";
 
 export default function PublicNavbar() {
   return (
-    <div className="sticky top-0 z-50 shadow backdrop-blur supports-[backdrop-filter]:bg-background/40">
+    <div className="supports-[backdrop-filter]:bg-background/40 sticky top-0 z-50 shadow backdrop-blur">
       <div className="mx-auto max-w-7xl px-4 py-4">
-        <div className="flex items-center justify-between gap-5">
+        <div className="flex items-center justify-between gap-2 xs:gap-5">
           <Link href={"/"}>
             <Image
               src={logo}
               alt="telehealth logo"
-              className="max-xs:h-7 max-xs:w-auto xs:h-12 xs:w-auto aspect-auto cursor-pointer"
+              className="w-auto cursor-pointer max-xs:h-5 xs:h-8 sm:h-10"
               quality={100}
               loading="eager"
             />
           </Link>
 
           {/* small button for mobile */}
-          <div className="flex gap-3 items-center xs:hidden">
+          <div className="flex items-center gap-3 xs:hidden">
             <Link href={"/login"}>
               <Button size="small">Sign in</Button>
             </Link>
@@ -34,7 +34,7 @@ export default function PublicNavbar() {
           </div>
 
           {/* base button for large device */}
-          <div className="xs:flex gap-3 items-center hidden">
+          <div className="hidden items-center gap-3 xs:flex">
             <Link href={"/login"}>
               <Button>Sign in</Button>
             </Link>

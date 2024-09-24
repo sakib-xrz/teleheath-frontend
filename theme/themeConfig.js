@@ -11,6 +11,7 @@ const themeConfig = {
     Button: {
       defaultShadow: "",
       primaryShadow: "",
+      fontWeight: 600,
       algorithm: true,
     },
     Dropdown: {
