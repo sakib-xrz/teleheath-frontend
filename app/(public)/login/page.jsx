@@ -1,21 +1,14 @@
 "use client";
 
-import Image from "next/image";
-import loginIllustration from "@/public/image/login-illustration.png";
-import Container from "@/components/shared/Container";
-import { Button, DatePicker, Input } from "antd";
-import Label from "@/components/shared/Label";
-import Link from "next/link";
 import * as Yup from "yup";
-import { useFormik } from "formik";
-import FormikErrorBox from "@/components/shared/FormikErrorBox";
-import dayjs from "dayjs";
-import weekday from "dayjs/plugin/weekday";
-import localeData from "dayjs/plugin/localeData";
-import FormInput from "@/components/form/FormInput";
+import Link from "next/link";
+import Image from "next/image";
 
-dayjs.extend(weekday);
-dayjs.extend(localeData);
+import { useFormik } from "formik";
+import { Button } from "antd";
+import Container from "@/components/shared/Container";
+import FormInput from "@/components/form/FormInput";
+import loginIllustration from "@/public/image/login-illustration.png";
 
 export default function Login() {
   const loginSchema = Yup.object({
