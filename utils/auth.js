@@ -37,9 +37,7 @@ export const removeUserInfo = () => {
 };
 
 export const getNewAccessToken = async () => {
-  return await axiosInstance({
-    url: `${BASE_URL}/auth/refresh-token`,
-    method: "POST",
+  return await axiosInstance.post(`${BASE_URL}/auth/refresh-token`, {
     headers: {
       "Content-Type": "application/json",
     },
