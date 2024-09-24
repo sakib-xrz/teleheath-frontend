@@ -3,12 +3,19 @@
 import Image from "next/image";
 import loginIllustration from "@/public/image/login-illustration.png";
 import Container from "@/components/shared/Container";
-import { Button, Input } from "antd";
+import { Button, DatePicker, Input } from "antd";
 import Label from "@/components/shared/Label";
 import Link from "next/link";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import FormikErrorBox from "@/components/shared/FormikErrorBox";
+import dayjs from "dayjs";
+import weekday from "dayjs/plugin/weekday";
+import localeData from "dayjs/plugin/localeData";
+import FormInput from "@/components/form/FormInput";
+
+dayjs.extend(weekday);
+dayjs.extend(localeData);
 
 export default function Login() {
   const loginSchema = Yup.object({
@@ -20,8 +27,8 @@ export default function Login() {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "sakibxrz21@gmail.com",
+      password: "Sakib@123",
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
@@ -41,36 +48,22 @@ export default function Login() {
           </p>
           <form className="space-y-5 lg:mr-14" onSubmit={formik.handleSubmit}>
             <div className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="email" required>
-                  Email
-                </Label>
-                <Input
-                  name="email"
-                  placeholder="Enter your email"
-                  {...formik.getFieldProps("email")}
-                />
-                <FormikErrorBox formik={formik} name="email" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="password" required>
-                  Password
-                </Label>
-                <Input.Password
-                  name="password"
-                  placeholder="Enter your password"
-                  {...formik.getFieldProps("password")}
-                />
-                <FormikErrorBox formik={formik} name="password" />
-                <div className="text-right">
-                  <Link
-                    href="/forgot-password"
-                    className="text-right text-sm font-medium text-primary hover:underline"
-                  >
-                    Forgot password?
-                  </Link>
-                </div>
-              </div>
+              <FormInput
+                label="Email"
+                name="email"
+                placeholder="Enter your email"
+                formik={formik}
+                required
+              />
+
+              <FormInput
+                label="Password"
+                name="password"
+                placeholder="Enter your password"
+                type="password"
+                formik={formik}
+                required
+              />
             </div>
             <Button type="primary" htmlType="submit" block>
               Sign in
