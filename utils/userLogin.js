@@ -1,6 +1,6 @@
 import { storeUserInfo } from "./auth";
 import { BASE_URL } from "./constant";
-import { setAccessToken } from "@/actions/setAccessToken";
+import setAccessToken from "@/actions/setAccessToken";
 
 const userLogin = async (payload) => {
   const response = await fetch(`${BASE_URL}/auth/login`, {

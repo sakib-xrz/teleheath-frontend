@@ -9,8 +9,13 @@ import { Button } from "antd";
 import Container from "@/components/shared/Container";
 import FormInput from "@/components/form/FormInput";
 import loginIllustration from "@/public/image/login-illustration.png";
+import userLogin from "@/utils/userLogin";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Login() {
+  const [loading, setLoading] = useState(false);
+
   const loginSchema = Yup.object({
     email: Yup.string()
       .email("Invalid email address")
@@ -24,8 +29,20 @@ export default function Login() {
       password: "Sakib@123",
     },
     validationSchema: loginSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      setLoading(true);
+
+      const promise = (async () => {
+        await userLogin(values);
+      })();
+
+      promise.finally(() => setLoading(false));
+
+      toast.promise(promise, {
+        loading: "Logging in...",
+        success: "Logged in successfully",
+        error: (error) => error.message || "Failed to login",
+      });
     },
   });
 
