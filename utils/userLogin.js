@@ -1,3 +1,5 @@
+import { jwtDecode } from "jwt-decode";
+
 import axiosInstance from "@/helpers/axiosInstance";
 import { storeUserInfo } from "./auth";
 import { BASE_URL } from "./constant";
@@ -18,10 +20,12 @@ const userLogin = async (payload) => {
       const { accessToken, needPasswordChange } = response?.data || {};
 
       if (accessToken) {
+        const role = jwtDecode(accessToken)?.role;
+
         storeUserInfo(accessToken);
         setAccessToken(accessToken, {
           needPasswordChange,
-          redirect: "/dashboard",
+          redirect: `/dashboard/${role === "SUPER_ADMIN" ? "super-admin" : role.toLowerCase()}`,
         });
       }
     }
