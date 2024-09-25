@@ -32,8 +32,6 @@ axiosInstance.interceptors.response.use(
   function (response) {
     // Successful response handling
     const responseObj = {
-      statusCode: response?.status || 200,
-      message: response?.data?.message || "Success",
       data: response?.data?.data,
       meta: response?.data?.meta,
     };

@@ -25,7 +25,12 @@ export function middleware(request) {
     if (AuthRoutes.includes(pathname)) {
       return NextResponse.next(); // Allow access to login or register
     }
-    return NextResponse.redirect(new URL("/login", request.url)); // Redirect to login if no token and accessing private route
+    return NextResponse.redirect(
+      new URL(
+        `/login?next=${pathname.startsWith("/") ? `${pathname.slice(1)}` : pathname}`,
+        request.url,
+      ),
+    ); // Redirect to login if no token and accessing private route
   }
 
   // Decode the JWT token
@@ -51,10 +56,7 @@ export function middleware(request) {
   }
 
   // Allow access to common private routes
-  if (
-    commonPrivateRoutes.includes(pathname) ||
-    commonPrivateRoutes.some((route) => pathname.startsWith(route))
-  ) {
+  if (commonPrivateRoutes.includes(pathname)) {
     return NextResponse.next();
   }
 
