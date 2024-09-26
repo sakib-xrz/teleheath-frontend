@@ -1,12 +1,11 @@
 "use client";
 
-import { Avatar, Dropdown, Skeleton } from "antd";
+import { Dropdown, Skeleton } from "antd";
 import { KeyRound, LogOut, UsersRound } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import UserProfileBox from "./UserProfileBox";
 
 export default function UserProfile({ user, isLoading }) {
-  const pathname = usePathname();
   const role = `${user?.role === "SUPER_ADMIN" ? "super-admin" : user?.role?.toLowerCase()}`;
   const items = [
     {
@@ -45,8 +44,6 @@ export default function UserProfile({ user, isLoading }) {
     },
   ];
 
-  const selected = items.find((item) => item.key === pathname)?.key;
-
   return (
     <>
       {isLoading ? (
@@ -61,26 +58,12 @@ export default function UserProfile({ user, isLoading }) {
         <Dropdown
           menu={{
             items,
-            selectable: true,
-            autoFocus: true,
-            defaultSelectedKeys: [selected],
           }}
           placement="bottomRight"
           className="max-sm:hidden"
         >
-          <div
-            className="flex cursor-pointer items-center gap-2 rounded-md border p-1"
-            onClick={(e) => e.preventDefault()}
-          >
-            <Avatar src={user?.profilePhoto} />
-            <div className="pr-2">
-              <p className="text-start text-xs font-semibold text-gray-700">
-                {user?.name}
-              </p>
-              <p className="text-start text-xs font-medium text-gray-500">
-                {user?.email}
-              </p>
-            </div>
+          <div>
+            <UserProfileBox user={user} />
           </div>
         </Dropdown>
       )}
