@@ -15,12 +15,12 @@ const themeConfig = {
       algorithm: true,
     },
     Dropdown: {
-      paddingBlock: 12,
+      paddingBlock: 10,
       fontSize: 16,
       fontSizeIcon: 16,
-      algorithm: true,
       controlItemBgActive: "rgb(15,118,110)",
-      controlItemBgHover: "rgba(15,118,109,0.1)",
+      controlItemBgActiveHover: "rgb(15,118,110)",
+      algorithm: true,
     },
     Menu: {
       horizontalItemSelectedColor: "rgb(15,118,110)",
