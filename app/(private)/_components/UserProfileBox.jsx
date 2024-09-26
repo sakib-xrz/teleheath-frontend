@@ -5,7 +5,7 @@ import { Avatar } from "antd";
 export default function UserProfileBox({ user }) {
   return (
     <div
-      className="flex cursor-pointer items-center gap-2 rounded-md border p-1"
+      className="flex w-fit items-center gap-2 p-1 sm:cursor-pointer sm:rounded-md sm:border"
       onClick={(e) => e.preventDefault()}
     >
       <Avatar src={user?.profilePhoto} />

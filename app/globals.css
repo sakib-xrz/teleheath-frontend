@@ -5,3 +5,12 @@
 .ant-dropdown-menu-item-selected {
   color: #ffffff !important;
 }
+
+.ant-skeleton-avatar.ant-skeleton-avatar-sm {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.ant-drawer-header {
+  padding: 1px 16px 1px 8px !important;
+}
