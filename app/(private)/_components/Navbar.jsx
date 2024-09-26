@@ -6,53 +6,22 @@ import Link from "next/link";
 import logo from "@/public/logo/telehealth-logo.png";
 import { useGetMeQuery } from "@/redux/api/userApi";
 import UserProfile from "./UserProfile";
-import { Menu, KeyRound, LogOut, UsersRound, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Avatar, Drawer, Dropdown, Skeleton } from "antd";
 import { useState } from "react";
 import UserProfileBox from "./UserProfileBox";
+import {
+  generateProfileDropdownOptions,
+  getUserRoleForRoute,
+} from "@/utils/constant";
 
 export default function PrivateNavbar() {
   const { data: user, isLoading } = useGetMeQuery();
   const [open, setOpen] = useState(false);
 
-  const role = `${user?.role === "SUPER_ADMIN" ? "super-admin" : user?.role?.toLowerCase()}`;
+  const role = getUserRoleForRoute(user);
 
-  const items = [
-    {
-      key: `/dashboard/${role}/profile`,
-      label: (
-        <Link
-          href={`/dashboard/${role}/profile`}
-          className="flex items-center gap-2"
-        >
-          <UsersRound className="size-5" /> Profile
-        </Link>
-      ),
-    },
-    {
-      key: "/dashboard/change-password",
-      label: (
-        <Link
-          href="/dashboard/change-password"
-          className="flex items-center gap-2"
-        >
-          <KeyRound className="size-5" /> Change Password
-        </Link>
-      ),
-    },
-    {
-      type: "divider",
-    },
-    {
-      key: "/logout",
-      label: (
-        <Link href="/logout" className="flex items-center gap-2">
-          <LogOut className="size-5" /> Logout
-        </Link>
-      ),
-      danger: true,
-    },
-  ];
+  const items = generateProfileDropdownOptions(role);
 
   const showDrawer = () => {
     setOpen(true);

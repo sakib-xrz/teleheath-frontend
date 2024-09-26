@@ -4,7 +4,7 @@ import { AUTH_TOKEN_KEY } from "./utils/constant";
 import { cookies } from "next/headers";
 
 const AuthRoutes = ["/login", "/register"];
-const commonPrivateRoutes = ["/dashboard", "/dashboard/change-password"];
+const commonPrivateRoutes = ["/dashboard", "/change-password"];
 
 const roleBasedPrivateRoutes = {
   PATIENT: [/^\/dashboard\/patient/],

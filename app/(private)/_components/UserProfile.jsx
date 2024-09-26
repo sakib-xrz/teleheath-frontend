@@ -1,48 +1,15 @@
 "use client";
 
 import { Dropdown, Skeleton } from "antd";
-import { KeyRound, LogOut, UsersRound } from "lucide-react";
-import Link from "next/link";
 import UserProfileBox from "./UserProfileBox";
+import {
+  generateProfileDropdownOptions,
+  getUserRoleForRoute,
+} from "@/utils/constant";
 
 export default function UserProfile({ user, isLoading }) {
-  const role = `${user?.role === "SUPER_ADMIN" ? "super-admin" : user?.role?.toLowerCase()}`;
-  const items = [
-    {
-      key: `/dashboard/${role}/profile`,
-      label: (
-        <Link
-          href={`/dashboard/${role}/profile`}
-          className="flex items-center gap-2"
-        >
-          <UsersRound className="size-5" /> Profile
-        </Link>
-      ),
-    },
-    {
-      key: "/dashboard/change-password",
-      label: (
-        <Link
-          href="/dashboard/change-password"
-          className="flex items-center gap-2"
-        >
-          <KeyRound className="size-5" /> Change Password
-        </Link>
-      ),
-    },
-    {
-      type: "divider",
-    },
-    {
-      key: "/logout",
-      label: (
-        <Link href="/logout" className="flex items-center gap-2">
-          <LogOut className="size-5" /> Logout
-        </Link>
-      ),
-      danger: true,
-    },
-  ];
+  const role = getUserRoleForRoute(user);
+  const items = generateProfileDropdownOptions(role);
 
   return (
     <>
