@@ -63,7 +63,7 @@ export default function PrivateNavbar() {
   };
 
   return (
-    <div className="supports-[backdrop-filter]:bg-background/40 sticky top-0 z-50 shadow backdrop-blur">
+    <div className="sticky top-0 z-50 bg-white shadow">
       <div className="py-2 pl-4 pr-6 sm:px-8">
         <div className="flex items-center justify-between gap-2 xs:gap-5">
           <Link href={isLoading ? "#" : `/dashboard/${role}`}>

@@ -4,8 +4,9 @@ const themeConfig = {
     controlHeight: 40,
     controlHeightLG: 46,
     colorPrimary: "#0f766e",
-    algorithm: true,
     colorInfo: "#0f766e",
+    colorBgContainer: "#ffffff",
+    algorithm: true,
   },
   components: {
     Button: {

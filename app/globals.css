@@ -14,3 +14,23 @@
 .ant-drawer-header {
   padding: 1px 16px 1px 8px !important;
 }
+
+.ant-layout-sider {
+  background-color: #ffffff !important;
+}
+
+.ant-layout-sider-trigger {
+  background-color: #0f766e !important;
+}
+
+.ant-menu-inline-collapsed > .ant-menu-item {
+  padding-inline: calc(50% - 10px - 8px) !important;
+}
+
+.ant-menu-item-icon {
+  vertical-align: -7px !important;
+}
+
+.ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title {
+  padding-inline: calc(50% - 10px - 8px) !important;
+}
