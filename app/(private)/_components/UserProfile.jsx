@@ -1,12 +1,13 @@
 "use client";
 
 import { Dropdown, Skeleton } from "antd";
+import { usePathname } from "next/navigation";
+
 import UserProfileBox from "./UserProfileBox";
 import {
   generateProfileDropdownOptions,
   getUserRoleForRoute,
 } from "@/utils/constant";
-import { usePathname } from "next/navigation";
 
 export default function UserProfile({ user, isLoading }) {
   const pathname = usePathname();
