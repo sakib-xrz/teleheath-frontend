@@ -10,7 +10,7 @@ export default function UserProfileBox({ user }) {
     >
       <Avatar src={user?.profilePhoto} />
       <div className="pr-2">
-        <p className="text-start text-xs font-semibold text-gray-700">
+        <p className="text-start text-xs font-semibold text-primary">
           {user?.name}
         </p>
         <p className="text-start text-xs font-medium text-gray-500">

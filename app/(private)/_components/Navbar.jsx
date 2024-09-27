@@ -16,10 +16,11 @@ import {
   getUserRoleForRoute,
 } from "@/utils/constant";
 import { getUserInfo } from "@/utils/auth";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function PrivateNavbar() {
   const router = useRouter();
+  const pathname = usePathname();
   const { data: user, isLoading } = useGetMeQuery();
   const [open, setOpen] = useState(false);
   const authUser = getUserInfo();
@@ -84,6 +85,7 @@ export default function PrivateNavbar() {
               }
             >
               <AntMenu
+                selectedKeys={[pathname]}
                 defaultSelectedKeys={["1"]}
                 items={sidebarItems}
                 style={{ border: "none" }}

@@ -4,13 +4,14 @@ import Container from "@/components/shared/Container";
 import { getUserInfo } from "@/utils/auth";
 import { getSidebarItems } from "@/utils/constant";
 import { Layout, Menu } from "antd";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 const { Content, Sider } = Layout;
 
 export default function Sidebar({ children }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const user = getUserInfo();
 
@@ -31,7 +32,7 @@ export default function Sidebar({ children }) {
             style={{ overflow: "auto", height: "100vh", position: "fixed" }}
           >
             <Menu
-              defaultSelectedKeys={["1"]}
+              selectedKeys={[pathname]}
               mode="inline"
               items={items}
               onClick={({ key }) => router.push(key)}
