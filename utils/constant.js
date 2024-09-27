@@ -27,7 +27,7 @@ export const generateProfileDropdownOptions = (role) => {
       ),
     },
     {
-      key: "/dashboard/change-password",
+      key: "/change-password",
       label: (
         <Link href="/change-password" className="flex items-center gap-2">
           <KeyRound className="size-5" /> Change Password

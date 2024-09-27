@@ -59,6 +59,7 @@ export default function PrivateNavbar() {
                 <Dropdown
                   menu={{
                     items,
+                    selectedKeys: [pathname],
                   }}
                   placement="bottomRight"
                   className="!cursor-pointer"
