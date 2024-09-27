@@ -1,13 +1,26 @@
 "use client";
 
 import * as Yup from "yup";
-import { Button, Card } from "antd";
+import { Button, Modal, Result } from "antd";
 import FormInput from "@/components/form/FormInput";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { useChangePasswordMutation } from "@/redux/api/userApi";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { getUserInfo } from "@/utils/auth";
+import { getUserRoleForRoute } from "@/utils/constant";
 
 export default function ChangePassword() {
   const [loading, setLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const router = useRouter();
+
+  const user = getUserInfo();
+  const role = getUserRoleForRoute(user);
+
+  const [changePassword] = useChangePasswordMutation();
+
   const formik = useFormik({
     initialValues: {
       oldPassword: "",
@@ -30,12 +43,30 @@ export default function ChangePassword() {
         .required("Retype new password is required"),
     }),
     onSubmit: async (values) => {
-      console.log(values);
+      setLoading(true);
+
+      const payload = {
+        oldPassword: values.oldPassword,
+        newPassword: values.newPassword,
+      };
+
+      const promise = (async () => {
+        await changePassword(payload).unwrap();
+        setOpenModal(true);
+      })();
+
+      promise.finally(() => setLoading(false));
+
+      toast.promise(promise, {
+        loading: "Changing password...",
+        success: "Password changed successfully",
+        error: (error) => error.message || "Failed to change password",
+      });
     },
   });
   return (
     <div className="flex min-h-[calc(100vh-3.1rem)] justify-center sm:min-h-[calc(100vh-4.1rem)] lg:items-center">
-      <Card>
+      <div className="!h-fit rounded-md border p-6 max-lg:border-0">
         <p className="mb-5 text-2xl font-semibold max-lg:mt-5 max-lg:text-center md:text-3xl">
           Change your password
         </p>
@@ -70,7 +101,37 @@ export default function ChangePassword() {
             Change password
           </Button>
         </form>
-      </Card>
+
+        <Modal
+          centered
+          open={openModal}
+          closable={false}
+          keyboard={false}
+          okText={"Logout"}
+          maskClosable={false}
+          cancelText={"Continue"}
+          onOk={() => {
+            setOpenModal(false);
+            router.push("/logout");
+          }}
+          onCancel={() => {
+            setOpenModal(false);
+            router.push(`/dashboard/${role}`);
+          }}
+        >
+          <Result
+            status="success"
+            title="Password changed successfully"
+            subTitle="It's recommended to logout and login again, but you can continue for now."
+            style={{
+              paddingLeft: 0,
+              paddingRight: 0,
+              paddingTop: 10,
+              paddingBottom: 10,
+            }}
+          />
+        </Modal>
+      </div>
     </div>
   );
 }
