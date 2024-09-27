@@ -8,9 +8,17 @@ export const userApi = baseApi.injectEndpoints({
         url: "/users/me",
         method: "GET",
       }),
+      providesTags: [tagTypes.user],
     }),
-    providesTags: [tagTypes.user],
+
+    changePassword: build.mutation({
+      query: (data) => ({
+        url: "/auth/change-password",
+        method: "POST",
+        data,
+      }),
+    }),
   }),
 });
 
-export const { useGetMeQuery } = userApi;
+export const { useGetMeQuery, useChangePasswordMutation } = userApi;
