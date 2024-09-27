@@ -1,9 +1,14 @@
+import { jwtDecode } from "jwt-decode";
+
 import axiosInstance from "@/helpers/axiosInstance";
 import { storeUserInfo } from "./auth";
 import { BASE_URL } from "./constant";
 import setAccessToken from "@/actions/setAccessToken";
 
 const userLogin = async (payload) => {
+  const urlParams = new URLSearchParams(window?.location?.search);
+  const existingRedirectURL = urlParams.get("next");
+
   try {
     const response = await axiosInstance.post(
       `${BASE_URL}/auth/login`,
@@ -14,16 +19,18 @@ const userLogin = async (payload) => {
       },
     );
 
-    if (response?.statusCode === 200) {
-      const { accessToken, needPasswordChange } = response?.data || {};
+    const { accessToken, needPasswordChange } = response?.data || {};
 
-      if (accessToken) {
-        storeUserInfo(accessToken);
-        setAccessToken(accessToken, {
-          needPasswordChange,
-          redirect: "/dashboard",
-        });
-      }
+    if (accessToken) {
+      const role = jwtDecode(accessToken)?.role;
+
+      storeUserInfo(accessToken);
+      setAccessToken(accessToken, {
+        needPasswordChange,
+        redirect: existingRedirectURL
+          ? existingRedirectURL
+          : `/dashboard/${role === "SUPER_ADMIN" ? "super-admin" : role.toLowerCase()}`,
+      });
     }
 
     return response;

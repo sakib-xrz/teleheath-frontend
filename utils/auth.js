@@ -6,6 +6,7 @@ import {
   setToLocalStorage,
 } from "./localStorage";
 import axiosInstance from "@/helpers/axiosInstance";
+import removeAccessToken from "@/actions/removeAccessToken";
 
 export const storeUserInfo = (token) => {
   return setToLocalStorage(AUTH_TOKEN_KEY, token);
@@ -43,4 +44,16 @@ export const getNewAccessToken = async () => {
     },
     withCredentials: true,
   });
+};
+
+export const logout = async () => {
+  await axiosInstance.post(`${BASE_URL}/auth/logout`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+  });
+
+  removeUserInfo();
+  removeAccessToken();
 };

@@ -4,8 +4,9 @@ const themeConfig = {
     controlHeight: 40,
     controlHeightLG: 46,
     colorPrimary: "#0f766e",
-    algorithm: true,
     colorInfo: "#0f766e",
+    colorBgContainer: "#ffffff",
+    algorithm: true,
   },
   components: {
     Button: {
@@ -15,12 +16,12 @@ const themeConfig = {
       algorithm: true,
     },
     Dropdown: {
-      paddingBlock: 12,
+      paddingBlock: 10,
       fontSize: 16,
       fontSizeIcon: 16,
-      algorithm: true,
       controlItemBgActive: "rgb(15,118,110)",
-      controlItemBgHover: "rgba(15,118,109,0.1)",
+      controlItemBgActiveHover: "rgb(15,118,110)",
+      algorithm: true,
     },
     Menu: {
       horizontalItemSelectedColor: "rgb(15,118,110)",
@@ -28,7 +29,6 @@ const themeConfig = {
       colorPrimaryBorder: "rgba(15,118,109,0.1)",
       controlHeightLG: 46,
       itemActiveBg: "rgba(15,118,109,0.1)",
-      itemHoverBg: "rgba(15,118,109,0.1)",
       itemHoverColor: "rgb(15,118,110)",
       groupTitleColor: "rgb(15,118,110)",
       itemSelectedColor: "rgb(15,118,110)",
