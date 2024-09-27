@@ -56,7 +56,7 @@ export default function Login() {
           <p className="mb-5 text-2xl font-semibold max-lg:mt-10 max-lg:text-center md:text-3xl lg:mb-8">
             Sign in to your account
           </p>
-          <form className="space-y-5 lg:mr-14" onSubmit={formik.handleSubmit}>
+          <form className="space-y-1 lg:mr-14" onSubmit={formik.handleSubmit}>
             <div className="space-y-2">
               <FormInput
                 label="Email"
@@ -66,16 +66,26 @@ export default function Login() {
                 required
               />
 
-              <FormInput
-                label="Password"
-                name="password"
-                placeholder="Enter your password"
-                type="password"
-                formik={formik}
-                required
-              />
+              <div>
+                <FormInput
+                  label="Password"
+                  name="password"
+                  placeholder="Enter your password"
+                  type="password"
+                  formik={formik}
+                  required
+                />
+                <Link href="/forgot-password" className="flex justify-end">
+                  <Button
+                    type="link"
+                    className="!p-0 text-primary hover:underline"
+                  >
+                    Forgot password?
+                  </Button>
+                </Link>
+              </div>
             </div>
-            <Button type="primary" htmlType="submit" block>
+            <Button type="primary" htmlType="submit" block loading={loading}>
               Sign in
             </Button>
           </form>
@@ -83,7 +93,7 @@ export default function Login() {
           <div className="mt-5 text-center lg:mr-14">
             <p>{`Don't have an account?`} </p>
             <Link href="/register">
-              <Button type="link" className="text-primary">
+              <Button type="link" className="!p-0 text-primary hover:underline">
                 Create New Account
               </Button>
             </Link>
