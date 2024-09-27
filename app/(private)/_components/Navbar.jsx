@@ -1,14 +1,15 @@
 "use client";
 
+import { Avatar, Drawer, Dropdown, Skeleton, Menu as AntMenu } from "antd";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 import logo from "@/public/logo/telehealth-logo.png";
 import { useGetMeQuery } from "@/redux/api/userApi";
 import UserProfile from "./UserProfile";
-import { Menu, X } from "lucide-react";
-import { Avatar, Drawer, Dropdown, Skeleton, Menu as AntMenu } from "antd";
-import { useState } from "react";
 import UserProfileBox from "./UserProfileBox";
 import {
   generateProfileDropdownOptions,
@@ -16,13 +17,14 @@ import {
   getUserRoleForRoute,
 } from "@/utils/constant";
 import { getUserInfo } from "@/utils/auth";
-import { usePathname, useRouter } from "next/navigation";
 
 export default function PrivateNavbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const { data: user, isLoading } = useGetMeQuery();
+
   const [open, setOpen] = useState(false);
+
+  const { data: user, isLoading } = useGetMeQuery();
   const authUser = getUserInfo();
 
   const role = getUserRoleForRoute(user);
@@ -51,7 +53,9 @@ export default function PrivateNavbar() {
             />
           </Link>
 
+          {/* For small screens */}
           <div className="hidden items-center gap-3 max-sm:flex">
+            {/* User profile dropdown for small screens */}
             <div>
               {isLoading ? (
                 <Skeleton.Avatar active size="small" />
@@ -68,6 +72,8 @@ export default function PrivateNavbar() {
                 </Dropdown>
               )}
             </div>
+
+            {/* Menu button for small screens */}
             <div>
               <Menu
                 className="cursor-pointer text-primary"
@@ -75,6 +81,7 @@ export default function PrivateNavbar() {
               />
             </div>
 
+            {/* Sidebar drawer for small screens */}
             <Drawer
               title={<UserProfileBox user={user} />}
               placement={"right"}
@@ -97,6 +104,8 @@ export default function PrivateNavbar() {
               />
             </Drawer>
           </div>
+
+          {/* For large screens */}
           <UserProfile user={user} isLoading={isLoading} />
         </div>
       </div>
