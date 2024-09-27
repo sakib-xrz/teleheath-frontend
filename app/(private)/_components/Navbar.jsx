@@ -7,21 +7,26 @@ import logo from "@/public/logo/telehealth-logo.png";
 import { useGetMeQuery } from "@/redux/api/userApi";
 import UserProfile from "./UserProfile";
 import { Menu, X } from "lucide-react";
-import { Avatar, Drawer, Dropdown, Skeleton } from "antd";
+import { Avatar, Drawer, Dropdown, Skeleton, Menu as AntMenu } from "antd";
 import { useState } from "react";
 import UserProfileBox from "./UserProfileBox";
 import {
   generateProfileDropdownOptions,
+  getSidebarItems,
   getUserRoleForRoute,
 } from "@/utils/constant";
+import { getUserInfo } from "@/utils/auth";
+import { useRouter } from "next/navigation";
 
 export default function PrivateNavbar() {
+  const router = useRouter();
   const { data: user, isLoading } = useGetMeQuery();
   const [open, setOpen] = useState(false);
+  const authUser = getUserInfo();
 
   const role = getUserRoleForRoute(user);
-
   const items = generateProfileDropdownOptions(role);
+  const sidebarItems = getSidebarItems(authUser?.role);
 
   const showDrawer = () => {
     setOpen(true);
@@ -77,7 +82,17 @@ export default function PrivateNavbar() {
               extra={
                 <X onClick={onClose} className="cursor-pointer text-primary" />
               }
-            ></Drawer>
+            >
+              <AntMenu
+                defaultSelectedKeys={["1"]}
+                items={sidebarItems}
+                style={{ border: "none" }}
+                onClick={({ key }) => {
+                  router.push(key);
+                  onClose();
+                }}
+              />
+            </Drawer>
           </div>
           <UserProfile user={user} isLoading={isLoading} />
         </div>

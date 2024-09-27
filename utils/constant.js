@@ -1,4 +1,12 @@
-import { KeyRound, LogOut, UsersRound } from "lucide-react";
+import {
+  BriefcaseMedical,
+  ChartPie,
+  KeyRound,
+  LogOut,
+  UserRoundCog,
+  UserRoundPlus,
+  UsersRound,
+} from "lucide-react";
 import Link from "next/link";
 
 export const AUTH_TOKEN_KEY = "AUTH_TOKEN";
@@ -43,4 +51,42 @@ export const generateProfileDropdownOptions = (role) => {
 
 export const getUserRoleForRoute = (user) => {
   return `${user?.role === "SUPER_ADMIN" ? "super-admin" : user?.role?.toLowerCase()}`;
+};
+
+function getItem(label, key, icon, children) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  };
+}
+
+export const getSidebarItems = (role) => {
+  const SUPER_ADMIN = [
+    getItem("Dashboard", "/dashboard/super-admin", <ChartPie />),
+    getItem("Admins", "/dashboard/super-admin/admins", <UserRoundCog />),
+    getItem("Doctors", "/dashboard/super-admin/doctors", <BriefcaseMedical />),
+    getItem("Patients", "/dashboard/super-admin/patients", <UserRoundPlus />),
+    getItem("Users", "/dashboard/super-admin/users", <UsersRound />),
+  ];
+
+  switch (role) {
+    case "SUPER_ADMIN":
+      return SUPER_ADMIN;
+    // case "ADMIN":
+    //   return SUPER_ADMIN.slice(1);
+    // case "DOCTOR":
+    //   return [
+    //     getItem("Dashboard", "/doctor/dashboard", <ChartPie />),
+    //     getItem("Patients", "/doctor/patients", <UserRoundPlus />),
+    //   ];
+    // case "PATIENT":
+    //   return [
+    //     getItem("Dashboard", "/patient/dashboard", <ChartPie />),
+    //     getItem("Doctors", "/patient/doctors", <BriefcaseMedical />),
+    //   ];
+    default:
+      return [];
+  }
 };

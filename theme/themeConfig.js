@@ -29,7 +29,6 @@ const themeConfig = {
       colorPrimaryBorder: "rgba(15,118,109,0.1)",
       controlHeightLG: 46,
       itemActiveBg: "rgba(15,118,109,0.1)",
-      itemHoverBg: "rgba(15,118,109,0.1)",
       itemHoverColor: "rgb(15,118,110)",
       groupTitleColor: "rgb(15,118,110)",
       itemSelectedColor: "rgb(15,118,110)",

@@ -34,3 +34,15 @@
 .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title {
   padding-inline: calc(50% - 10px - 8px) !important;
 }
+
+.ant-drawer-body {
+  padding: 0 !important;
+}
+
+.ant-tooltip {
+  font-size: 16px !important;
+}
+
+.ant-menu-title-content {
+  font-weight: 600 !important;
+}
