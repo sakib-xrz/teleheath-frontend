@@ -1,5 +1,5 @@
 import setAccessToken from "@/actions/setAccessToken";
-import { getNewAccessToken, storeUserInfo } from "@/utils/auth";
+import { storeUserInfo, getNewAccessToken } from "@/utils/auth";
 import { AUTH_TOKEN_KEY } from "@/utils/constant";
 import { getFromLocalStorage } from "@/utils/localStorage";
 import axios from "axios";
@@ -42,11 +42,9 @@ axiosInstance.interceptors.response.use(
 
     // Token expired error handling
     if (
-      error?.response?.data?.error?.name === "TokenExpiredError" &&
-      !config.sent
+      error?.response?.data?.error?.name === "TokenExpiredError" ||
+      "jwt expired"
     ) {
-      config.sent = true;
-
       try {
         // Attempt to get a new access token
         const response = await getNewAccessToken();

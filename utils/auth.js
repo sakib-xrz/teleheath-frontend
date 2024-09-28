@@ -38,12 +38,19 @@ export const removeUserInfo = () => {
 };
 
 export const getNewAccessToken = async () => {
-  return await axiosInstance.post(`${BASE_URL}/auth/refresh-token`, {
+  const response = await fetch(`${BASE_URL}/auth/refresh-token`, {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    withCredentials: true,
+    credentials: "include",
   });
+
+  if (!response.ok) {
+    throw new Error("Failed to refresh token");
+  }
+
+  return await response.json();
 };
 
 export const logout = async () => {
