@@ -94,7 +94,7 @@ export default function PrivateNavbar() {
             >
               <AntMenu
                 selectedKeys={[pathname]}
-                defaultSelectedKeys={["1"]}
+                mode="inline"
                 items={sidebarItems}
                 style={{ border: "none" }}
                 onClick={({ key }) => {
