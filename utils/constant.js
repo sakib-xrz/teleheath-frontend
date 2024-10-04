@@ -65,7 +65,15 @@ function getItem(label, key, icon, children) {
 export const getSidebarItems = (role) => {
   const SUPER_ADMIN = [
     getItem("Dashboard", "/dashboard/super-admin", <ChartPie />),
-    getItem("Admins", "/dashboard/super-admin/admins", <UserRoundCog />),
+    getItem(
+      "Admins",
+      "/dashboard/super-admin/admins-options",
+      <UserRoundCog />,
+      [
+        getItem("Admin List", "/dashboard/super-admin/admins"),
+        getItem("Add New Admin", "/dashboard/super-admin/admins/add"),
+      ],
+    ),
     getItem("Doctors", "/dashboard/super-admin/doctors", <BriefcaseMedical />),
     getItem("Patients", "/dashboard/super-admin/patients", <UserRoundPlus />),
     getItem("Users", "/dashboard/super-admin/users", <UsersRound />),
