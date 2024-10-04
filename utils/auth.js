@@ -60,7 +60,4 @@ export const logout = async () => {
     },
     withCredentials: true,
   });
-
-  removeUserInfo();
-  removeAccessToken();
 };
