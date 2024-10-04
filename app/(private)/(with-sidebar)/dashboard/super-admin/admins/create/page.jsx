@@ -8,6 +8,7 @@ const { Dragger } = Upload;
 import { useFormik } from "formik";
 import { ImageUp } from "lucide-react";
 import Link from "next/link";
+import * as Yup from "yup";
 
 const items = [
   {
@@ -30,8 +31,35 @@ export default function CreateAdmin() {
       contactNumber: "",
       file: null,
     },
+    validationSchema: Yup.object({
+      name: Yup.string().required("Name is required"),
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      password: Yup.string()
+        .min(6, "Password must be at least 6 characters")
+        .required("Password is required"),
+      contactNumber: Yup.string()
+        .matches(/^(\+88)?(01[3-9]\d{8})$/, "Invalid contact number")
+        .required("Contact number is required"),
+    }),
     onSubmit: (values) => {
-      console.log(values);
+      const payload = {
+        data: {
+          name: values.name,
+          email: values.email,
+          password: values.password,
+          contactNumber: values.contactNumber.startsWith("+88")
+            ? values.contactNumber
+            : `+88${values.contactNumber}`,
+        },
+        file: values.file,
+      };
+
+      const formData = new FormData();
+
+      formData.append("data", JSON.stringify(payload.data));
+      formData.append("file", payload.file);
     },
   });
 
