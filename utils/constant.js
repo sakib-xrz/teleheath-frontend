@@ -70,8 +70,8 @@ export const getSidebarItems = (role) => {
       "/dashboard/super-admin/admins-options",
       <UserRoundCog />,
       [
-        getItem("Admin List", "/dashboard/super-admin/admins"),
-        getItem("Add New Admin", "/dashboard/super-admin/admins/add"),
+        getItem("Admins List", "/dashboard/super-admin/admins"),
+        getItem("Create Admin", "/dashboard/super-admin/admins/create"),
       ],
     ),
     getItem("Doctors", "/dashboard/super-admin/doctors", <BriefcaseMedical />),

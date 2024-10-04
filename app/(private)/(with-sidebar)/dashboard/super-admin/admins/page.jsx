@@ -7,8 +7,8 @@ export default function Admin() {
     <div>
       <TitleWithButton
         title="Admins"
-        buttonText="Add New Admin"
-        href="/dashboard/super-admin/admins/add"
+        buttonText="Create Admin"
+        href="/dashboard/super-admin/admins/create"
       />
     </div>
   );
