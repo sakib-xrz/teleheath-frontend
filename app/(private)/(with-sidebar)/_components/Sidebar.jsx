@@ -4,6 +4,7 @@ import Container from "@/components/shared/Container";
 import { getUserInfo } from "@/utils/auth";
 import { getSidebarItems } from "@/utils/constant";
 import { Layout, Menu } from "antd";
+import { calc } from "antd/es/theme/internal";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -22,7 +23,7 @@ export default function Sidebar({ children }) {
       <div className="max-sm:hidden">
         <Layout
           style={{
-            minHeight: "100vh",
+            minHeight: "calc(100vh - 68px)",
           }}
         >
           <Sider
