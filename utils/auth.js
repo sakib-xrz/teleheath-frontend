@@ -1,10 +1,12 @@
 import { jwtDecode } from "jwt-decode";
-import { AUTH_TOKEN_KEY } from "./constant";
+import { AUTH_TOKEN_KEY, BASE_URL } from "./constant";
 import {
   getFromLocalStorage,
   removeFromLocalStorage,
   setToLocalStorage,
 } from "./localStorage";
+import axiosInstance from "@/helpers/axiosInstance";
+import removeAccessToken from "@/actions/removeAccessToken";
 
 export const storeUserInfo = (token) => {
   return setToLocalStorage(AUTH_TOKEN_KEY, token);
@@ -33,4 +35,32 @@ export const isUserLoggedIn = () => {
 
 export const removeUserInfo = () => {
   return removeFromLocalStorage(AUTH_TOKEN_KEY);
+};
+
+export const getNewAccessToken = async () => {
+  const response = await fetch(`${BASE_URL}/auth/refresh-token`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to refresh token");
+  }
+
+  return await response.json();
+};
+
+export const logout = async () => {
+  await axiosInstance.post(`${BASE_URL}/auth/logout`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+  });
+
+  removeUserInfo();
+  removeAccessToken();
 };
