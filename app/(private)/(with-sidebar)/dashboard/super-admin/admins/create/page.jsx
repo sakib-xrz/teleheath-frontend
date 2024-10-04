@@ -2,6 +2,7 @@
 
 import FormInput from "@/components/form/FormInput";
 import Label from "@/components/shared/Label";
+import Title from "@/components/shared/Title";
 import { Breadcrumb, Button, Upload } from "antd";
 const { Dragger } = Upload;
 import { useFormik } from "formik";
@@ -38,9 +39,7 @@ export default function CreateAdmin() {
     <div className="space-y-5 lg:space-y-10">
       <Breadcrumb items={items} />
       <div className="sm:rounded-md sm:bg-white sm:p-6 sm:shadow lg:mx-auto lg:w-8/12 lg:space-y-3 lg:p-8">
-        <h2 className="text-center text-lg font-semibold text-primary md:text-2xl xl:text-3xl">
-          Create Admin
-        </h2>
+        <Title title={"Create Admin"} />
         <form onSubmit={formik.handleSubmit} className="space-y-5">
           <div className="space-y-2">
             <FormInput
