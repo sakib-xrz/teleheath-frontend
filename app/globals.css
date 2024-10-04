@@ -50,3 +50,7 @@
 .ant-upload-drag {
   border: 2.5px dashed rgb(188, 188, 188) !important;
 }
+
+.ant-upload-drag:hover {
+  border: 2.5px dashed rgb(15, 118, 110) !important;
+}

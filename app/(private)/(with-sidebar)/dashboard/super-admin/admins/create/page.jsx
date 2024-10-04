@@ -2,7 +2,6 @@
 
 import FormInput from "@/components/form/FormInput";
 import Label from "@/components/shared/Label";
-import TitleWithButton from "@/components/shared/TitleWithButton";
 import { Breadcrumb, Button, Upload } from "antd";
 const { Dragger } = Upload;
 import { useFormik } from "formik";
@@ -25,6 +24,10 @@ export default function CreateAdmin() {
   const formik = useFormik({
     initialValues: {
       name: "",
+      email: "",
+      password: "",
+      contactNumber: "",
+      file: null,
     },
     onSubmit: (values) => {
       console.log(values);
@@ -32,9 +35,9 @@ export default function CreateAdmin() {
   });
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 lg:space-y-10">
       <Breadcrumb items={items} />
-      <div className="sm:rounded-md sm:bg-white sm:p-6 sm:shadow lg:mx-auto lg:w-8/12 lg:p-8">
+      <div className="sm:rounded-md sm:bg-white sm:p-6 sm:shadow lg:mx-auto lg:w-8/12 lg:space-y-3 lg:p-8">
         <h2 className="text-center text-lg font-semibold text-primary md:text-2xl xl:text-3xl">
           Create Admin
         </h2>
@@ -76,7 +79,14 @@ export default function CreateAdmin() {
 
             <div className="space-y-1">
               <Label htmlFor={"file"}>Profile Picture</Label>
-              <Dragger accept="" maxCount={1}>
+              <Dragger
+                maxCount={1}
+                multiple={false}
+                accept=".jpg,.jpeg,.png"
+                onChange={({ file }) => {
+                  formik.setFieldValue("file", file?.originFileObj);
+                }}
+              >
                 <p className="flex justify-center">
                   <ImageUp className="size-8 opacity-70" />
                 </p>
@@ -84,7 +94,7 @@ export default function CreateAdmin() {
                   Click or drag file to this area to upload
                 </p>
                 <p className="ant-upload-hint">
-                  Support only for png or jpg file types.
+                  Support only .jpg, .jpeg, .png file format.
                 </p>
               </Dragger>
             </div>
