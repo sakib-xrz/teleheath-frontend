@@ -3,19 +3,16 @@
 
 import { logout } from "@/utils/auth";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export default function Logout() {
   const router = useRouter();
 
-  useEffect(() => {
-    const logOut = async () => {
-      await logout();
-      router.push("/login");
-    };
+  const logOut = async () => {
+    await logout();
+    router.push("/login");
+  };
 
-    logOut();
-  }, []);
+  logOut();
 
   return null;
 }
