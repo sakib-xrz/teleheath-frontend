@@ -1,11 +1,21 @@
 import React from "react";
 
-const GradientBg = () => {
+const gradientSizes = {
+  size1: "h-2/3 w-2/3",
+  size2: "h-1/2 w-1/3",
+  size3: "h-1/2 w-1/2",
+};
+
+const GradientBg = ({
+  isRight = false,
+  isBottom = false,
+  size = "size1",
+  ...props
+}) => {
   return (
-    <div>
-      <div className="size-80 rounded-full bg-primary bg-blend-lighten blur-[80px] hover:bg-blend-darken"></div>
-      <div className="size-60 rounded-full bg-green-600 bg-blend-lighten blur-3xl hover:bg-blend-darken"></div>
-    </div>
+    <div
+      className={`absolute ${isRight ? "right-0 bg-gradient-to-tr" : "left-0 bg-gradient-to-tl"} ${isBottom ? "bottom-0" : ""} ${gradientSizes[size]} z-0 from-teal-100 via-teal-200 to-primary blur-[90px]`}
+    ></div>
   );
 };
 
