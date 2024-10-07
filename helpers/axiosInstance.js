@@ -41,10 +41,7 @@ axiosInstance.interceptors.response.use(
     const config = error.config;
 
     // Token expired error handling
-    if (
-      error?.response?.data?.error?.name === "TokenExpiredError" ||
-      "jwt expired"
-    ) {
+    if (error?.response?.data?.error?.name === "TokenExpiredError") {
       try {
         // Attempt to get a new access token
         const response = await getNewAccessToken();
