@@ -130,6 +130,7 @@ export default function CreateAdmin() {
                 onChange={({ file }) => {
                   formik.setFieldValue("file", file?.originFileObj);
                 }}
+                fileList={formik.values.file ? [formik.values.file] : []}
               >
                 <p className="flex justify-center">
                   <ImageUp className="size-8 opacity-70" />
