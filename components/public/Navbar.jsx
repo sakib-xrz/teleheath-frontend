@@ -7,7 +7,7 @@ import { Button } from "antd";
 
 export default function PublicNavbar() {
   return (
-    <div className="supports-[backdrop-filter]:bg-background/40 sticky top-0 z-50 shadow backdrop-blur">
+    <div className="sticky top-0 z-50 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 py-4">
         <div className="flex items-center justify-between gap-2 xs:gap-5">
           <Link href={"/"}>
