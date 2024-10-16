@@ -18,7 +18,23 @@ export const userApi = baseApi.injectEndpoints({
         data,
       }),
     }),
+
+    createAdmin: build.mutation({
+      query: (data) => ({
+        url: "/users/create-admin",
+        method: "POST",
+        data,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }),
+      invalidatesTags: [tagTypes.user, tagTypes.admin],
+    }),
   }),
 });
 
-export const { useGetMeQuery, useChangePasswordMutation } = userApi;
+export const {
+  useGetMeQuery,
+  useChangePasswordMutation,
+  useCreateAdminMutation,
+} = userApi;

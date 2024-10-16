@@ -2,23 +2,30 @@ import axiosInstance from "./axiosInstance";
 
 const axiosBaseQuery =
   ({ baseUrl } = { baseUrl: "" }) =>
-  async ({ url, method, data, params, contentType }) => {
+  async ({
+    url,
+    method,
+    data,
+    params,
+    headers = {
+      "Content-Type": "application/json",
+    },
+  }) => {
     try {
       const result = await axiosInstance({
         url: baseUrl + url,
         method,
         data,
         params,
-        headers: {
-          "Content-Type": contentType || "application/json",
-        },
+        headers,
       });
       return result;
     } catch (axiosError) {
       return {
         error: {
-          status: axiosError.response?.status,
-          data: axiosError.response?.data || axiosError.message,
+          status: axiosError?.status,
+          message: axiosError?.message,
+          errorMessages: axiosError?.errorMessages,
         },
       };
     }

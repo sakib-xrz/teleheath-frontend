@@ -32,17 +32,14 @@ export default function Login() {
     onSubmit: async (values) => {
       setLoading(true);
 
-      const promise = (async () => {
+      try {
         await userLogin(values);
-      })();
-
-      promise.finally(() => setLoading(false));
-
-      toast.promise(promise, {
-        loading: "Logging in...",
-        success: "Logged in successfully",
-        error: (error) => error.message || "Failed to login",
-      });
+        toast.success("Logged in successfully");
+      } catch (error) {
+        toast.error(error.message || "Failed to login");
+      } finally {
+        setLoading(false);
+      }
     },
   });
 

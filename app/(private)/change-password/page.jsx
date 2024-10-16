@@ -50,18 +50,14 @@ export default function ChangePassword() {
         newPassword: values.newPassword,
       };
 
-      const promise = (async () => {
+      try {
         await changePassword(payload).unwrap();
         setOpenModal(true);
-      })();
-
-      promise.finally(() => setLoading(false));
-
-      toast.promise(promise, {
-        loading: "Changing password...",
-        success: "Password changed successfully",
-        error: (error) => error.message || "Failed to change password",
-      });
+      } catch (error) {
+        toast.error(error.message || "Failed to change password");
+      } finally {
+        setLoading(false);
+      }
     },
   });
   return (

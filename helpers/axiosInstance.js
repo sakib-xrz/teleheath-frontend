@@ -41,7 +41,10 @@ axiosInstance.interceptors.response.use(
     const config = error.config;
 
     // Token expired error handling
-    if (error?.response?.data?.error?.name === "TokenExpiredError") {
+    if (
+      error?.response?.data?.error?.name === "TokenExpiredError" ||
+      error?.response?.data?.message === "jwt expired"
+    ) {
       try {
         // Attempt to get a new access token
         const response = await getNewAccessToken();
@@ -62,7 +65,7 @@ axiosInstance.interceptors.response.use(
     }
     // General error handling if it's not a token expiration issue
     const errorResponse = {
-      statusCode: error?.response?.status || 500,
+      status: error?.response?.status || 500,
       message: error?.response?.data?.message || "Something went wrong!!!",
       errorMessages: error?.response?.data?.errors || [],
     };

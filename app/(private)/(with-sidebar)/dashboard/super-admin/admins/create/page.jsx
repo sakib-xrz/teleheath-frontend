@@ -3,11 +3,14 @@
 import FormInput from "@/components/form/FormInput";
 import Label from "@/components/shared/Label";
 import Title from "@/components/shared/Title";
-import { Breadcrumb, Button, Upload } from "antd";
+import { useCreateAdminMutation } from "@/redux/api/userApi";
+import { Breadcrumb, Button, Input, Upload } from "antd";
 const { Dragger } = Upload;
 import { useFormik } from "formik";
 import { ImageUp } from "lucide-react";
 import Link from "next/link";
+import { useEffect } from "react";
+import { toast } from "sonner";
 import * as Yup from "yup";
 
 const items = [
@@ -23,6 +26,8 @@ const items = [
 ];
 
 export default function CreateAdmin() {
+  const [createAdmin, { isLoading }] = useCreateAdminMutation();
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -43,7 +48,7 @@ export default function CreateAdmin() {
         .matches(/^(\+88)?(01[3-9]\d{8})$/, "Invalid contact number")
         .required("Contact number is required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const payload = {
         data: {
           name: values.name,
@@ -60,6 +65,18 @@ export default function CreateAdmin() {
 
       formData.append("data", JSON.stringify(payload.data));
       formData.append("file", payload.file);
+
+      try {
+        await createAdmin(formData).unwrap();
+        toast.success("Admin created successfully");
+        formik.resetForm();
+      } catch (error) {
+        toast.error(
+          error?.status === 409
+            ? "Admin already exists with this email"
+            : "Failed to create admin",
+        );
+      }
     },
   });
 
@@ -127,7 +144,12 @@ export default function CreateAdmin() {
             </div>
           </div>
 
-          <Button type="primary" htmlType="submit" className="w-full">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="w-full"
+            loading={isLoading}
+          >
             Create Admin
           </Button>
         </form>
