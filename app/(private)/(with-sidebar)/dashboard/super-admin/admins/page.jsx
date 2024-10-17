@@ -37,34 +37,18 @@ export default function Admin() {
             </div>
           </div>
 
-          <div className="hidden items-center gap-2 xs:flex sm:hidden">
-            <Button size="small">
+          <div className="flex items-center gap-2 sm:hidden">
+            <Button
+              size="small"
+              className="!w-full !border-primary !text-primary hover:!border-primary/70 hover:!text-primary/70"
+            >
               <PencilLine className="size-4" />
               Edit
             </Button>
 
-            <Button danger size="small">
+            <Button danger size="small" className="!w-full">
               <Trash2 className="size-4" />
-              Soft delete
-            </Button>
-
-            <Button type="primary" size="small" danger>
-              <Trash className="size-4" />
               Delete
-            </Button>
-          </div>
-
-          <div className="flex items-center gap-2 xs:hidden">
-            <Button size="small">
-              <PencilLine className="size-4" />
-            </Button>
-
-            <Button danger size="small">
-              <Trash2 className="size-4" />
-            </Button>
-
-            <Button type="primary" size="small" danger>
-              <Trash className="size-4" />
             </Button>
           </div>
         </div>
@@ -91,23 +75,18 @@ export default function Admin() {
       key: "action",
       render: (_text, _record) => (
         <div className="flex items-center gap-2">
-          <Tooltip title="Edit">
-            <Button size="small">
-              <PencilLine className="size-4" />
-            </Button>
-          </Tooltip>
+          <Button
+            size="small"
+            className="!border-primary !text-primary hover:!border-primary/70 hover:!text-primary/70"
+          >
+            <PencilLine className="size-4" />
+            Edit
+          </Button>
 
-          <Tooltip title="Soft delete" color="#ff4d4f">
-            <Button danger size="small">
-              <Trash2 className="size-4" />
-            </Button>
-          </Tooltip>
-
-          <Tooltip title="Delete" color="#ff4d4f">
-            <Button type="primary" size="small" danger>
-              <Trash className="size-4" />
-            </Button>
-          </Tooltip>
+          <Button danger size="small">
+            <Trash2 className="size-4" />
+            Delete
+          </Button>
         </div>
       ),
       responsive: ["sm"],
