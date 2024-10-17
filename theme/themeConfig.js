@@ -6,6 +6,26 @@ const themeConfig = {
     colorPrimary: "#0f766e",
     colorInfo: "#0f766e",
     colorBgContainer: "#ffffff",
+
+    screenSMMin: 575,
+    screenSM: 575,
+    screenSMMax: 767,
+
+    screenMdMin: 768,
+    screenMd: 768,
+    screenMdMax: 1023,
+
+    screenLGMin: 1024,
+    screenLG: 1024,
+    screenLGMax: 1279,
+
+    screenXLMin: 1280,
+    screenXL: 1280,
+    screenXLMax: 1535,
+
+    screenXXLMin: 1536,
+    screenXXL: 1536,
+
     algorithm: true,
   },
   components: {
