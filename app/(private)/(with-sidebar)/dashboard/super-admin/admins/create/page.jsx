@@ -9,6 +9,7 @@ const { Dragger } = Upload;
 import { useFormik } from "formik";
 import { ImageUp } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import * as Yup from "yup";
 
@@ -25,6 +26,7 @@ const items = [
 ];
 
 export default function CreateAdmin() {
+  const router = useRouter();
   const [createAdmin, { isLoading }] = useCreateAdminMutation();
 
   const formik = useFormik({
@@ -69,6 +71,7 @@ export default function CreateAdmin() {
         await createAdmin(formData).unwrap();
         toast.success("Admin created successfully");
         formik.resetForm();
+        router.push("/dashboard/super-admin/admins");
       } catch (error) {
         toast.error(
           error?.status === 409
