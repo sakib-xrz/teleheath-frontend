@@ -18,7 +18,10 @@ export const adminApi = baseApi.injectEndpoints({
       query: (query) => ({
         url: "/admins",
         method: "GET",
-        params: query,
+        params: query || {
+          page: 3,
+          limit: 10,
+        },
       }),
       providesTags: [tagTypes.admin],
     }),

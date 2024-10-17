@@ -2,12 +2,16 @@
 
 import TitleWithButton from "@/components/shared/TitleWithButton";
 import { useGetAdminQuery } from "@/redux/api/adminAPi";
-import { Button, Table, Tooltip } from "antd";
-import { PencilLine, Trash, Trash2 } from "lucide-react";
+import { Button, Table } from "antd";
+import { PencilLine, Trash2 } from "lucide-react";
 import Image from "next/image";
 
 export default function Admin() {
-  const { data, isLoading } = useGetAdminQuery();
+  const result = useGetAdminQuery();
+
+  const { data, isLoading } = result;
+
+  console.log(data);
 
   const columns = [
     {
@@ -21,7 +25,7 @@ export default function Admin() {
               alt={record.name}
               width={50}
               height={50}
-              className="rounded-full max-md:size-20"
+              className="size-14 rounded-full border-2 object-cover max-md:size-20"
             />
             <div>
               <p className="font-medium">{record.name}</p>
@@ -103,7 +107,7 @@ export default function Admin() {
 
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={data?.map((admin) => ({ ...admin, key: admin.id }))}
         bordered
         loading={isLoading}
         pagination={false}
