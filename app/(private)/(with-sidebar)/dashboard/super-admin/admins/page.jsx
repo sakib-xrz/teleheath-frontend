@@ -1,13 +1,48 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import Label from "@/components/shared/Label";
 import TitleWithButton from "@/components/shared/TitleWithButton";
+import { generateQueryString } from "@/helpers/utils";
 import { useGetAdminQuery } from "@/redux/api/adminAPi";
-import { Button, Table } from "antd";
+import { Button, Input, Pagination, Table } from "antd";
 import { PencilLine, Trash2 } from "lucide-react";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 export default function Admin() {
-  const result = useGetAdminQuery();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [searchKey, setSearchKey] = useState(searchParams.get("search") || "");
+
+  const [params, setParams] = useState({
+    search: searchParams.get("search") || "",
+    page: searchParams.get("page") || 1,
+    limit: searchParams.get("limit") || 10,
+  });
+
+  const debouncedSearch = useDebouncedCallback((value) => {
+    setParams((prevParams) => ({
+      ...prevParams,
+      search: value,
+      page: 1,
+    }));
+  }, 400);
+
+  const debouncedUpdateURL = useDebouncedCallback(() => {
+    const queryString = generateQueryString(params);
+    router.push(`/dashboard/super-admin/admins${queryString}`, undefined, {
+      shallow: true,
+    });
+  }, 500);
+
+  useEffect(() => {
+    debouncedUpdateURL();
+  }, [params]);
+
+  const result = useGetAdminQuery(params);
 
   const { data, isLoading } = result;
 
@@ -95,21 +130,69 @@ export default function Admin() {
     },
   ];
 
+  const handleSearchChange = (event) => {
+    const value = event.target.value;
+    setSearchKey(value);
+    debouncedSearch(value);
+  };
+
   return (
-    <div className="space-y-5">
+    <div className="space-y-8">
       <TitleWithButton
         title="Admins"
         buttonText="Create Admin"
         href="/dashboard/super-admin/admins/create"
       />
 
-      <Table
-        columns={columns}
-        dataSource={data?.data.map((admin) => ({ ...admin, key: admin.id }))}
-        bordered
-        loading={isLoading}
-        pagination={false}
-      />
+      <div className="space-y-5">
+        <div className="space-y-1">
+          <Label htmlFor={"search"}>Search admin</Label>
+          <Input
+            name={"search"}
+            type={"search"}
+            placeholder="Search admin by name, email, or contact number"
+            style={{
+              border: `1px solid rgb(188,188,188)`,
+            }}
+            onChange={handleSearchChange}
+            value={searchKey || ""}
+            allowClear
+          />
+
+          {searchKey ? (
+            <p className="text-sm text-gray-500">
+              Showing results for{" "}
+              <span className="font-medium">{searchKey}</span>
+            </p>
+          ) : (
+            <p className="text-sm text-gray-500">
+              Showing {data?.data?.length} results of {data?.meta?.total}
+            </p>
+          )}
+        </div>
+        <Table
+          columns={columns}
+          dataSource={data?.data}
+          rowKey={(record) => record.id}
+          bordered
+          loading={isLoading}
+          pagination={false}
+        />
+        {data?.meta?.total > params?.limit && (
+          <Pagination
+            align="center"
+            current={params?.page}
+            onChange={(page) => {
+              setParams((prevParams) => ({
+                ...prevParams,
+                page,
+              }));
+            }}
+            total={data?.meta?.total}
+            pageSize={params?.limit}
+          />
+        )}
+      </div>
     </div>
   );
 }
