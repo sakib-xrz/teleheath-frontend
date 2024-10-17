@@ -24,7 +24,8 @@ export default function PrivateNavbar() {
 
   const [open, setOpen] = useState(false);
 
-  const { data: user, isLoading } = useGetMeQuery();
+  const { data, isLoading } = useGetMeQuery();
+  const user = data?.data;
   const authUser = getUserInfo();
 
   const role = getUserRoleForRoute(user);

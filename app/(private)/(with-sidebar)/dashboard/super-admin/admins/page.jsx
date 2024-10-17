@@ -11,8 +11,6 @@ export default function Admin() {
 
   const { data, isLoading } = result;
 
-  console.log(data);
-
   const columns = [
     {
       title: "Name",
