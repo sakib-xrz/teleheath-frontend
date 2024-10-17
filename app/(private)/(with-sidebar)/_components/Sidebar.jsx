@@ -20,7 +20,7 @@ export default function Sidebar({ children }) {
 
   return (
     <>
-      <div className="max-sm:hidden">
+      <div className="max-md:hidden">
         <Layout
           style={{
             minHeight: "calc(100vh - 68px)",
@@ -50,7 +50,7 @@ export default function Sidebar({ children }) {
           </Layout>
         </Layout>
       </div>
-      <div className="hidden max-sm:block">
+      <div className="hidden max-md:block">
         <Container>{children}</Container>
       </div>
     </>

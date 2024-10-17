@@ -18,7 +18,7 @@ export default function UserProfile({ user, isLoading }) {
   return (
     <>
       {isLoading ? (
-        <div className="flex w-40 cursor-pointer items-center gap-2 rounded-md border p-1 px-2 max-sm:hidden">
+        <div className="hidden w-40 cursor-pointer items-center gap-2 rounded-md border p-1 px-2 md:flex">
           <Skeleton.Avatar active />
           <div className="space-y-1 pr-2">
             <p className="h-3.5 w-16 animate-pulse rounded-sm bg-gray-200"></p>
@@ -32,7 +32,7 @@ export default function UserProfile({ user, isLoading }) {
             selectedKeys: [pathname],
           }}
           placement="bottomRight"
-          className="max-sm:hidden"
+          className="max-md:hidden"
         >
           <div>
             <UserProfileBox user={user} />

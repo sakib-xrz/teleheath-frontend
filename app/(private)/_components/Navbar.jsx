@@ -54,7 +54,7 @@ export default function PrivateNavbar() {
           </Link>
 
           {/* For small screens */}
-          <div className="hidden items-center gap-3 max-sm:flex">
+          <div className="hidden items-center gap-3 max-md:flex">
             {/* User profile dropdown for small screens */}
             <div>
               {isLoading ? (
