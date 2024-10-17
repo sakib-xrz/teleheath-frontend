@@ -3,13 +3,12 @@
 import FormInput from "@/components/form/FormInput";
 import Label from "@/components/shared/Label";
 import Title from "@/components/shared/Title";
-import { useCreateAdminMutation } from "@/redux/api/userApi";
-import { Breadcrumb, Button, Input, Upload } from "antd";
+import { useCreateAdminMutation } from "@/redux/api/adminAPi";
+import { Breadcrumb, Button, Upload } from "antd";
 const { Dragger } = Upload;
 import { useFormik } from "formik";
 import { ImageUp } from "lucide-react";
 import Link from "next/link";
-import { useEffect } from "react";
 import { toast } from "sonner";
 import * as Yup from "yup";
 
