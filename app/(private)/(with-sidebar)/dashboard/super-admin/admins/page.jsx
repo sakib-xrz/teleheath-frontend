@@ -71,10 +71,10 @@ export default function Admin() {
       responsive: ["md"],
     },
     {
-      title: "Action",
+      title: <p className="text-center">Action</p>,
       key: "action",
       render: (_text, _record) => (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center gap-2">
           <Button
             size="small"
             className="!border-primary !text-primary hover:!border-primary/70 hover:!text-primary/70"
