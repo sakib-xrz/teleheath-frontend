@@ -19,7 +19,12 @@ const axiosBaseQuery =
         params,
         headers,
       });
-      return result;
+      return {
+        data: {
+          data: result.data,
+          meta: result.meta,
+        },
+      };
     } catch (axiosError) {
       return {
         error: {

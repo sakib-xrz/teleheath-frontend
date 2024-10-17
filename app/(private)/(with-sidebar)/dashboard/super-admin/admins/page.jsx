@@ -107,7 +107,7 @@ export default function Admin() {
 
       <Table
         columns={columns}
-        dataSource={data?.map((admin) => ({ ...admin, key: admin.id }))}
+        dataSource={data?.data.map((admin) => ({ ...admin, key: admin.id }))}
         bordered
         loading={isLoading}
         pagination={false}
