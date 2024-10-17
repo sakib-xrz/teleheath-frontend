@@ -79,21 +79,19 @@ export const getSidebarItems = (role) => {
     getItem("Users", "/dashboard/super-admin/users", <UsersRound />),
   ];
 
+  const ADMIN = [
+    getItem("Dashboard", "/dashboard/admin", <ChartPie />),
+    getItem("Admins", "/dashboard/admin/admins", <UserRoundCog />),
+    getItem("Doctors", "/dashboard/admin/doctors", <BriefcaseMedical />),
+    getItem("Patients", "/dashboard/admin/patients", <UserRoundPlus />),
+    getItem("Users", "/dashboard/admin/users", <UsersRound />),
+  ];
+
   switch (role) {
     case "SUPER_ADMIN":
       return SUPER_ADMIN;
-    // case "ADMIN":
-    //   return SUPER_ADMIN.slice(1);
-    // case "DOCTOR":
-    //   return [
-    //     getItem("Dashboard", "/doctor/dashboard", <ChartPie />),
-    //     getItem("Patients", "/doctor/patients", <UserRoundPlus />),
-    //   ];
-    // case "PATIENT":
-    //   return [
-    //     getItem("Dashboard", "/patient/dashboard", <ChartPie />),
-    //     getItem("Doctors", "/patient/doctors", <BriefcaseMedical />),
-    //   ];
+    case "ADMIN":
+      return ADMIN;
     default:
       return [];
   }
