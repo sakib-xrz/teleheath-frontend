@@ -1,50 +1,47 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import { useEffect, useState } from "react";
+import { Button, Input, Pagination, Table } from "antd";
+import { PencilLine, Trash2 } from "lucide-react";
+import { useDebouncedCallback } from "use-debounce";
+import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
+
 import Label from "@/components/shared/Label";
 import TitleWithButton from "@/components/shared/TitleWithButton";
 import { generateQueryString } from "@/helpers/utils";
 import { useGetAdminQuery } from "@/redux/api/adminAPi";
-import { Button, Input, Pagination, Table } from "antd";
-import { PencilLine, Trash2 } from "lucide-react";
-import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useDebouncedCallback } from "use-debounce";
 
 export default function Admin() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [searchKey, setSearchKey] = useState(searchParams.get("search") || "");
 
+  const [searchKey, setSearchKey] = useState(searchParams.get("search") || "");
   const [params, setParams] = useState({
     search: searchParams.get("search") || "",
-    page: searchParams.get("page") || 1,
-    limit: searchParams.get("limit") || 10,
+    page: Number(searchParams.get("page")) || 1,
+    limit: Number(searchParams.get("limit")) || 20,
   });
 
   const debouncedSearch = useDebouncedCallback((value) => {
-    setParams((prevParams) => ({
-      ...prevParams,
-      search: value,
-      page: 1,
-    }));
+    setParams((prev) => ({ ...prev, search: value, page: 1 }));
   }, 400);
 
-  const debouncedUpdateURL = useDebouncedCallback(() => {
+  const updateURL = () => {
     const queryString = generateQueryString(params);
     router.push(`/dashboard/super-admin/admins${queryString}`, undefined, {
       shallow: true,
     });
-  }, 500);
+  };
+
+  const debouncedUpdateURL = useDebouncedCallback(updateURL, 500);
 
   useEffect(() => {
     debouncedUpdateURL();
   }, [params]);
 
-  const result = useGetAdminQuery(params);
-
-  const { data, isLoading } = result;
+  const { data, isLoading } = useGetAdminQuery(params);
 
   const columns = [
     {
@@ -58,7 +55,7 @@ export default function Admin() {
               alt={record.name}
               width={50}
               height={50}
-              className="size-14 rounded-full border-2 object-cover max-md:size-20"
+              className="rounded-full border-2 object-cover max-md:size-20"
             />
             <div>
               <p className="font-medium">{record.name}</p>
@@ -73,7 +70,6 @@ export default function Admin() {
               </a>
             </div>
           </div>
-
           <div className="flex items-center gap-2 sm:hidden">
             <Button
               size="small"
@@ -82,7 +78,6 @@ export default function Admin() {
               <PencilLine className="size-4" />
               Edit
             </Button>
-
             <Button danger size="small" className="!w-full">
               <Trash2 className="size-4" />
               Delete
@@ -119,7 +114,6 @@ export default function Admin() {
             <PencilLine className="size-4" />
             Edit
           </Button>
-
           <Button danger size="small">
             <Trash2 className="size-4" />
             Delete
@@ -130,10 +124,14 @@ export default function Admin() {
     },
   ];
 
-  const handleSearchChange = (event) => {
-    const value = event.target.value;
+  const handleSearchChange = (e) => {
+    const { value } = e.target;
     setSearchKey(value);
     debouncedSearch(value);
+  };
+
+  const handlePaginationChange = (page) => {
+    setParams((prev) => ({ ...prev, page }));
   };
 
   return (
@@ -143,32 +141,23 @@ export default function Admin() {
         buttonText="Create Admin"
         href="/dashboard/super-admin/admins/create"
       />
-
       <div className="space-y-5">
         <div className="space-y-1">
-          <Label htmlFor={"search"}>Search admin</Label>
+          <Label htmlFor="search">Search admin</Label>
           <Input
-            name={"search"}
-            type={"search"}
+            name="search"
+            type="search"
             placeholder="Search admin by name, email, or contact number"
-            style={{
-              border: `1px solid rgb(188,188,188)`,
-            }}
+            style={{ border: "1px solid rgb(188,188,188)" }}
             onChange={handleSearchChange}
-            value={searchKey || ""}
+            value={searchKey}
             allowClear
           />
-
-          {searchKey ? (
-            <p className="text-sm text-gray-500">
-              Showing results for{" "}
-              <span className="font-medium">{searchKey}</span>
-            </p>
-          ) : (
-            <p className="text-sm text-gray-500">
-              Showing {data?.data?.length} results of {data?.meta?.total}
-            </p>
-          )}
+          <p className="text-sm text-gray-500">
+            {searchKey
+              ? `Showing results for ${searchKey}`
+              : `Showing ${data?.data?.length || 0} results of ${data?.meta?.total || 0}`}
+          </p>
         </div>
         <Table
           columns={columns}
@@ -178,18 +167,13 @@ export default function Admin() {
           loading={isLoading}
           pagination={false}
         />
-        {data?.meta?.total > params?.limit && (
+        {data?.meta?.total > params.limit && (
           <Pagination
+            current={params.page}
+            onChange={handlePaginationChange}
+            total={data.meta.total}
+            pageSize={params.limit}
             align="center"
-            current={params?.page}
-            onChange={(page) => {
-              setParams((prevParams) => ({
-                ...prevParams,
-                page,
-              }));
-            }}
-            total={data?.meta?.total}
-            pageSize={params?.limit}
           />
         )}
       </div>
