@@ -12,9 +12,9 @@ export default function Logout() {
 
   useEffect(() => {
     const logOut = async () => {
-      await logout();
       await removeAccessToken();
       removeUserInfo();
+      await logout();
       router.push("/login");
     };
 

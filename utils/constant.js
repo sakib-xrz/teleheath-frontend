@@ -10,7 +10,6 @@ import {
 import Link from "next/link";
 
 export const AUTH_TOKEN_KEY = "AUTH_TOKEN";
-export const REFRESH_TOKEN_KEY = "REFRESH_TOKEN";
 
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
