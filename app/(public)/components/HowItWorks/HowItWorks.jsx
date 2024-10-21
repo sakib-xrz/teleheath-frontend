@@ -5,22 +5,27 @@ import Image from "next/image";
 import React, { useState } from "react";
 import HowItWorkStep from "./HowItWorkStep";
 import GradientBg from "../GradientBg";
+import image1 from "@/public/image/how_it_work/step-one.png";
+import image2 from "@/public/image/how_it_work/step-two.png";
+import image3 from "@/public/image/how_it_work/step-three.png";
+import image4 from "@/public/image/how_it_work/step-four.png";
+
 const steps = [
   {
     id: 1,
-    image: "/image/how_it_work/step-one.png",
+    image: image1,
   },
   {
     id: 2,
-    image: "/image/how_it_work/step-two.png",
+    image: image2,
   },
   {
     id: 3,
-    image: "/image/how_it_work/step-three.png",
+    image: image3,
   },
   {
     id: 4,
-    image: "/image/how_it_work/step-four.png",
+    image: image4,
   },
 ];
 
