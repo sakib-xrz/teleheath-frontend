@@ -7,7 +7,7 @@ export default function Home() {
       {/* Hero */}
       <HeroSection />
       {/* How it works */}
-      {/* <HowItWorks /> */}
+      <HowItWorks />
     </div>
   );
 }
