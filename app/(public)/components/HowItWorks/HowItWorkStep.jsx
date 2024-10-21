@@ -10,6 +10,7 @@ const HowItWorkStep = ({
 }) => {
   return (
     <div className="flex items-center gap-5">
+      {/* NUMBER */}
       <p className="text-[60px] font-bold text-gray-300">{id}</p>
       <div
         onClick={onClick}
