@@ -86,6 +86,8 @@ const HowItWorks = () => {
                   height={400}
                   width={400}
                   alt="How it work"
+                  quality={100}
+                  loading="lazy"
                 />
               </div>
             </div>
