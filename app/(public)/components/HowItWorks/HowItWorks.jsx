@@ -61,7 +61,7 @@ const howItWorksContent = [
 ];
 
 const HowItWorks = () => {
-  const [selectStep, setSelectStep] = useState(1);
+  const [selectStep, setSelectStep] = useState(0);
   return (
     <div className="pt-10">
       <Container>
