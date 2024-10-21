@@ -58,6 +58,5 @@ export const logout = async () => {
     headers: {
       "Content-Type": "application/json",
     },
-    withCredentials: true,
   });
 };

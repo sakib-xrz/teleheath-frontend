@@ -2,6 +2,7 @@
 "use client";
 
 import removeAccessToken from "@/actions/removeAccessToken";
+import removeRefreshToken from "@/actions/removeRefreshToken";
 import { logout, removeUserInfo } from "@/utils/auth";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -12,9 +13,10 @@ export default function Logout() {
 
   useEffect(() => {
     const logOut = async () => {
-      await removeAccessToken();
       removeUserInfo();
       await logout();
+      await removeAccessToken();
+      await removeRefreshToken();
       router.push("/login");
     };
 
