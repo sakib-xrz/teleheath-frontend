@@ -35,6 +35,9 @@ export default function FormInput({
           placeholder={placeholder}
           {...formik.getFieldProps(name)}
           {...props}
+          onWheel={() =>
+            type === "number" ? document.activeElement.blur() : props.onWheel
+          }
         />
       )}
 

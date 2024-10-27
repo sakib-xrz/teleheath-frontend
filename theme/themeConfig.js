@@ -66,6 +66,8 @@ const themeConfig = {
     Select: {
       optionSelectedBg: "rgb(15,118,110)",
       optionSelectedColor: "rgba(255,255,255,0.88)",
+      lineWidth: 2,
+      colorBorder: "rgb(188,188,188)",
     },
     Tooltip: {
       colorBgSpotlight: "rgb(15,118,110)",

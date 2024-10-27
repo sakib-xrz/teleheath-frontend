@@ -74,7 +74,15 @@ export const getSidebarItems = (role) => {
         getItem("Create Admin", "/dashboard/super-admin/admins/create"),
       ],
     ),
-    getItem("Doctors", "/dashboard/super-admin/doctors", <BriefcaseMedical />),
+    getItem(
+      "Doctors",
+      "/dashboard/super-admin/doctors-options",
+      <BriefcaseMedical />,
+      [
+        getItem("Doctors List", "/dashboard/super-admin/doctors"),
+        getItem("Create Doctor", "/dashboard/super-admin/doctors/create"),
+      ],
+    ),
     getItem("Patients", "/dashboard/super-admin/patients", <UserRoundPlus />),
     getItem("Users", "/dashboard/super-admin/users", <UsersRound />),
   ];
@@ -96,3 +104,14 @@ export const getSidebarItems = (role) => {
       return [];
   }
 };
+
+export const GENDER_OPTIONS = [
+  {
+    value: "MALE",
+    label: "Male",
+  },
+  {
+    value: "FEMALE",
+    label: "Female",
+  },
+];
