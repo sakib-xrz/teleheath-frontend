@@ -18,14 +18,22 @@ export const adminApi = baseApi.injectEndpoints({
       query: (query) => ({
         url: "/admins",
         method: "GET",
-        params: query || {
-          page: 3,
-          limit: 10,
-        },
+        params: query,
       }),
       providesTags: [tagTypes.admin],
+    }),
+    deleteAdmin: build.mutation({
+      query: (id) => ({
+        url: `/admins/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.user, tagTypes.admin],
     }),
   }),
 });
 
-export const { useCreateAdminMutation, useGetAdminQuery } = adminApi;
+export const {
+  useCreateAdminMutation,
+  useGetAdminQuery,
+  useDeleteAdminMutation,
+} = adminApi;

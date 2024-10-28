@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Button, Input, Pagination, Table } from "antd";
+import { Button, Input, Pagination, Popconfirm, Table } from "antd";
 import { PencilLine, Trash2 } from "lucide-react";
 import { useDebouncedCallback } from "use-debounce";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,7 +11,8 @@ import Image from "next/image";
 import Label from "@/components/shared/Label";
 import TitleWithButton from "@/components/shared/TitleWithButton";
 import { generateQueryString } from "@/helpers/utils";
-import { useGetAdminQuery } from "@/redux/api/adminAPi";
+import { useDeleteAdminMutation, useGetAdminQuery } from "@/redux/api/adminAPi";
+import { toast } from "sonner";
 
 export default function Admin() {
   const router = useRouter();
@@ -42,6 +43,18 @@ export default function Admin() {
   }, [params]);
 
   const { data, isLoading } = useGetAdminQuery(params);
+  const [deleteAdmin, { isLoading: isDeleteLoading }] =
+    useDeleteAdminMutation();
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteAdmin(id).unwrap();
+      toast.success("Admin deleted successfully");
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.message || "Failed to delete admin");
+    }
+  };
 
   const columns = [
     {
@@ -78,10 +91,21 @@ export default function Admin() {
               <PencilLine className="size-4" />
               Edit
             </Button>
-            <Button danger size="small" className="!w-full">
-              <Trash2 className="size-4" />
-              Delete
-            </Button>
+            <Popconfirm
+              title="Delete admin?"
+              description="Are you sure to delete this admin?"
+              onConfirm={() => {
+                handleDelete(record.id);
+              }}
+              okText="Yes"
+              cancelText="No"
+              okButtonProps={{ danger: true }}
+            >
+              <Button danger size="small" className="!w-full">
+                <Trash2 className="size-4" />
+                Delete
+              </Button>
+            </Popconfirm>
           </div>
         </div>
       ),
@@ -105,7 +129,7 @@ export default function Admin() {
     {
       title: <p className="text-center">Action</p>,
       key: "action",
-      render: (_text, _record) => (
+      render: (_text, record) => (
         <div className="flex items-center justify-center gap-2">
           <Button
             size="small"
@@ -114,10 +138,22 @@ export default function Admin() {
             <PencilLine className="size-4" />
             Edit
           </Button>
-          <Button danger size="small">
-            <Trash2 className="size-4" />
-            Delete
-          </Button>
+          <Popconfirm
+            title="Delete admin?"
+            description="Are you sure to delete this admin?"
+            onConfirm={() => {
+              handleDelete(record.id);
+            }}
+            okText="Yes"
+            cancelText="No"
+            okButtonProps={{ danger: true }}
+          >
+            {" "}
+            <Button danger size="small">
+              <Trash2 className="size-4" />
+              Delete
+            </Button>
+          </Popconfirm>
         </div>
       ),
       responsive: ["sm"],
@@ -164,7 +200,7 @@ export default function Admin() {
           dataSource={data?.data}
           rowKey={(record) => record.id}
           bordered
-          loading={isLoading}
+          loading={isLoading || isDeleteLoading}
           pagination={false}
         />
         {data?.meta?.total > params.limit && (
