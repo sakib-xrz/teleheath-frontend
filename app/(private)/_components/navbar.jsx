@@ -9,8 +9,8 @@ import { usePathname, useRouter } from "next/navigation";
 
 import logo from "@/public/logo/telehealth-logo.png";
 import { useGetMeQuery } from "@/redux/api/userApi";
-import UserProfile from "./UserProfile";
-import UserProfileBox from "./UserProfileBox";
+import UserProfile from "./user-profile";
+import UserProfileBox from "./user-profile-box";
 import {
   generateProfileDropdownOptions,
   getSidebarItems,

@@ -3,7 +3,7 @@
 import { Dropdown, Skeleton } from "antd";
 import { usePathname } from "next/navigation";
 
-import UserProfileBox from "./UserProfileBox";
+import UserProfileBox from "./user-profile-box";
 import {
   generateProfileDropdownOptions,
   getUserRoleForRoute,
