@@ -1,8 +1,8 @@
 "use client";
 
-import FormInput from "@/components/form/FormInput";
-import Label from "@/components/shared/Label";
-import Title from "@/components/shared/Title";
+import FormInput from "@/components/form/form-input";
+import Label from "@/components/shared/label";
+import Title from "@/components/shared/title";
 import { useCreateAdminMutation } from "@/redux/api/adminAPi";
 import { Breadcrumb, Button, Upload } from "antd";
 const { Dragger } = Upload;

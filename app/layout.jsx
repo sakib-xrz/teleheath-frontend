@@ -1,4 +1,4 @@
-import GlobalProvider from "@/components/shared/GlobalProvider";
+import GlobalProvider from "@/components/shared/global-provider";
 import "./globals.css";
 
 export const metadata = {

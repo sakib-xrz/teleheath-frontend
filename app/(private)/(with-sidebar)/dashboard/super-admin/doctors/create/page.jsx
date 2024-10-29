@@ -1,9 +1,9 @@
 "use client";
 
-import FormInput from "@/components/form/FormInput";
-import FormikErrorBox from "@/components/shared/FormikErrorBox";
-import Label from "@/components/shared/Label";
-import Title from "@/components/shared/Title";
+import FormInput from "@/components/form/form-input";
+import FormikErrorBox from "@/components/shared/formik-error-box";
+import Label from "@/components/shared/label";
+import Title from "@/components/shared/title";
 import { GENDER_OPTIONS } from "@/utils/constant";
 import { Breadcrumb, Button, Select } from "antd";
 import Dragger from "antd/es/upload/Dragger";

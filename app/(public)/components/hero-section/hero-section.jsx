@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import GradientBg from "../GradientBg";
+import GradientBg from "../gradient-bg";
 import { Button } from "antd";
 import { CalendarMinus2 } from "lucide-react";
 import Image from "next/image";

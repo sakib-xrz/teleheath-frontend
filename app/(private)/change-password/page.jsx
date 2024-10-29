@@ -2,7 +2,7 @@
 
 import * as Yup from "yup";
 import { Button, Modal, Result } from "antd";
-import FormInput from "@/components/form/FormInput";
+import FormInput from "@/components/form/form-input";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useChangePasswordMutation } from "@/redux/api/userApi";

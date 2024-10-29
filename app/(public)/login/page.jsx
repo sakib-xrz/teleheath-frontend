@@ -6,8 +6,8 @@ import Image from "next/image";
 
 import { useFormik } from "formik";
 import { Button } from "antd";
-import Container from "@/components/shared/Container";
-import FormInput from "@/components/form/FormInput";
+import Container from "@/components/shared/container";
+import FormInput from "@/components/form/form-input";
 import loginIllustration from "@/public/image/login-illustration.png";
 import userLogin from "@/utils/userLogin";
 import { useState } from "react";

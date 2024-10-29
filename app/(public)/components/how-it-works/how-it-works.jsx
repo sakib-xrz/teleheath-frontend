@@ -1,10 +1,10 @@
 "use client";
-import Container from "@/components/shared/Container";
+import Container from "@/components/shared/container";
 import { CalendarClock, FileText, MessageCircle, Video } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
-import HowItWorkStep from "./HowItWorkStep";
-import GradientBg from "../GradientBg";
+import HowItWorkStep from "./how-it-work-step";
+import GradientBg from "../gradient-bg";
 
 const steps = [
   {

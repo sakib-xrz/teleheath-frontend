@@ -8,8 +8,8 @@ import { useDebouncedCallback } from "use-debounce";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
-import Label from "@/components/shared/Label";
-import TitleWithButton from "@/components/shared/TitleWithButton";
+import Label from "@/components/shared/label";
+import TitleWithButton from "@/components/shared/title-with-button";
 import { generateQueryString } from "@/helpers/utils";
 import { useDeleteAdminMutation, useGetAdminQuery } from "@/redux/api/adminAPi";
 import { toast } from "sonner";

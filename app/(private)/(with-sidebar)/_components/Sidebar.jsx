@@ -1,6 +1,6 @@
 "use client";
 
-import Container from "@/components/shared/Container";
+import Container from "@/components/shared/container";
 import { getUserInfo } from "@/utils/auth";
 import { getSidebarItems } from "@/utils/constant";
 import { Layout, Menu } from "antd";

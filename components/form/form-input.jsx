@@ -1,8 +1,8 @@
 "use client";
 
 import { Input } from "antd";
-import FormikErrorBox from "../shared/FormikErrorBox";
-import Label from "../shared/Label";
+import FormikErrorBox from "../shared/formik-error-box";
+import Label from "../shared/label";
 
 export default function FormInput({
   label,
