@@ -13,6 +13,7 @@ import TitleWithButton from "@/components/shared/title-with-button";
 import { generateQueryString } from "@/helpers/utils";
 import { useDeleteAdminMutation, useGetAdminQuery } from "@/redux/api/adminAPi";
 import { toast } from "sonner";
+import EditForm from "./_components/edit-form";
 
 export default function Admin() {
   const router = useRouter();
@@ -24,6 +25,8 @@ export default function Admin() {
     page: Number(searchParams.get("page")) || 1,
     limit: Number(searchParams.get("limit")) || 20,
   });
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editableAdmin, setEditableAdmin] = useState(null);
 
   const debouncedSearch = useDebouncedCallback((value) => {
     setParams((prev) => ({ ...prev, search: value, page: 1 }));
@@ -87,6 +90,10 @@ export default function Admin() {
             <Button
               size="small"
               className="!w-full !border-primary !text-primary hover:!border-primary/70 hover:!text-primary/70"
+              onClick={() => {
+                setEditableAdmin(record);
+                setEditModalOpen(true);
+              }}
             >
               <PencilLine className="size-4" />
               Edit
@@ -134,6 +141,10 @@ export default function Admin() {
           <Button
             size="small"
             className="!border-primary !text-primary hover:!border-primary/70 hover:!text-primary/70"
+            onClick={() => {
+              setEditableAdmin(record);
+              setEditModalOpen(true);
+            }}
           >
             <PencilLine className="size-4" />
             Edit
@@ -213,6 +224,15 @@ export default function Admin() {
           />
         )}
       </div>
+
+      {editModalOpen && (
+        <EditForm
+          open={editModalOpen}
+          setOpen={() => setEditModalOpen(false)}
+          setEditableAdmin={setEditableAdmin}
+          admin={editableAdmin}
+        />
+      )}
     </div>
   );
 }

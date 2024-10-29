@@ -22,6 +22,14 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.admin],
     }),
+    updateAdmin: build.mutation({
+      query: ({ id, payload }) => ({
+        url: `/admins/${id}`,
+        method: "PATCH",
+        data: payload,
+      }),
+      invalidatesTags: [tagTypes.user, tagTypes.admin],
+    }),
     deleteAdmin: build.mutation({
       query: (id) => ({
         url: `/admins/${id}`,
@@ -35,5 +43,6 @@ export const adminApi = baseApi.injectEndpoints({
 export const {
   useCreateAdminMutation,
   useGetAdminQuery,
+  useUpdateAdminMutation,
   useDeleteAdminMutation,
 } = adminApi;
