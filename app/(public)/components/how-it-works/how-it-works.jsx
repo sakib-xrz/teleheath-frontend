@@ -9,19 +9,19 @@ import GradientBg from "../gradient-bg";
 const steps = [
   {
     id: 1,
-    image: "/image/how_it_work/step-one.png",
+    image: "/image/how-it-work/step-one.png",
   },
   {
     id: 2,
-    image: "/image/how_it_work/step-two.png",
+    image: "/image/how-it-work/step-two.png",
   },
   {
     id: 3,
-    image: "/image/how_it_work/step-three.png",
+    image: "/image/how-it-work/step-three.png",
   },
   {
     id: 4,
-    image: "/image/how_it_work/step-four.png",
+    image: "/image/how-it-work/step-four.png",
   },
 ];
 

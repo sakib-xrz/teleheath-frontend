@@ -50,7 +50,7 @@ const HeroSection = () => {
           <motion.div variants={fadeInUp} className={`${IMAGE_STYLE}`}>
             <Image
               className="h-full rounded-md object-cover object-center"
-              src="/image/hero_section/hero_img_1.jpg"
+              src="/image/hero-section/hero-img-1.jpg"
               alt="hero image 1"
               width={500}
               height={500}
@@ -64,7 +64,7 @@ const HeroSection = () => {
           >
             <Image
               className="h-full rounded-md object-cover object-center"
-              src="/image/hero_section/hero_img_2.jpg"
+              src="/image/hero-section/hero-img-2.jpg"
               alt="hero image 2"
               width={500}
               height={500}
@@ -75,7 +75,7 @@ const HeroSection = () => {
           <motion.div variants={fadeInUp} className={`${IMAGE_STYLE}`}>
             <Image
               className="h-full rounded-md object-cover object-center"
-              src="/image/hero_section/hero_img_3.jpg"
+              src="/image/hero-section/hero-img-3.jpg"
               alt="hero image 3"
               width={500}
               height={500}
@@ -89,7 +89,7 @@ const HeroSection = () => {
           >
             <Image
               className="-mb-10 h-full rounded-md object-cover object-center"
-              src="/image/hero_section/hero_img_4.jpg"
+              src="/image/hero-section/hero-img-4.jpg"
               alt="hero image 4"
               width={500}
               height={500}
