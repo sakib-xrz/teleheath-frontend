@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-// components/DoctorProfileCard.js
 export default function DoctorProfileCard({ doctor }) {
   const {
     name,
