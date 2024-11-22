@@ -95,6 +95,11 @@ const items = [
   },
 ];
 
+const styledItems = items.map((item) => ({
+  ...item,
+  label: <p className="font-semibold">{item.label}</p>,
+}));
+
 const FAQSection = () => {
   return (
     <div className="py-8 sm:py-10">
@@ -105,10 +110,12 @@ const FAQSection = () => {
           </h4>
         </header>
         <Collapse
-          items={items}
+          className="bg-white"
+          items={styledItems}
           bordered={false}
           defaultActiveKey={["1"]}
           size="large"
+          accordion
         />
       </Container>
     </div>
