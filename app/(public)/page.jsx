@@ -1,4 +1,5 @@
 import Doctors from "./components/doctors/doctors";
+import FAQSection from "./components/faq-section/faq-section";
 import HeroSection from "./components/hero-section/hero-section";
 import HowItWorks from "./components/how-it-works/how-it-works";
 import Services from "./components/services/services";
@@ -17,6 +18,8 @@ export default function Home() {
       <WhyChooseUs />
       {/* DOCTORS */}
       <Doctors />
+      {/* FAQ SECTION */}
+      <FAQSection />
     </div>
   );
 }
