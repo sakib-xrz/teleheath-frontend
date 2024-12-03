@@ -65,7 +65,7 @@ const HealthTips = () => {
               {healthTips.map((tip, index) => (
                 <motion.div
                   key={index}
-                  className="group relative overflow-hidden rounded-md shadow-md transition-shadow hover:cursor-pointer hover:shadow-lg"
+                  className="group relative overflow-hidden rounded-md shadow-md transition-shadow hover:shadow-lg"
                 >
                   {/* Background Image with Overlay */}
                   <div
