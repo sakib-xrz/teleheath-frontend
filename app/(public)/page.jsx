@@ -1,5 +1,6 @@
 import Doctors from "./components/doctors/doctors";
 import FAQSection from "./components/faq-section/faq-section";
+import FOOTER from "./components/footer/footer";
 import HeroSection from "./components/hero-section/hero-section";
 import HowItWorks from "./components/how-it-works/how-it-works";
 import Services from "./components/services/services";
@@ -23,6 +24,8 @@ export default function Home() {
       <FAQSection />
       {/* HEALTH TIPS */}
       <HealthTips />
+      {/* FOOTER */}
+      <FOOTER />
     </div>
   );
 }
