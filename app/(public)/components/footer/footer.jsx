@@ -1,141 +1,142 @@
-// components/Footer.js
+"use client";
+import Container from "@/components/shared/container";
 import Image from "next/image";
+import Link from "next/link";
+
+import logo from "@/public/logo/telehealth-logo.png";
+import { Mail, MapPin, Phone } from "lucide-react";
+import FormInput from "@/components/form/form-input";
+import { useFormik } from "formik";
+import { object, string } from "yup";
+import { Button } from "antd";
+const infoList = [
+  { label: "Appointment", value: "APPOINTMENT" },
+  { label: "Our Specialist", value: "OUR_SPECIALIST" },
+  {
+    label: "Why choose us",
+    value: "WHY_CHOOSE_US",
+  },
+  { label: "Our Services", value: "OUR_SERVICES" },
+  { label: "Health Tips", value: "HEALTH TIPS" },
+];
+const siteLinks = [
+  { label: "Home", value: "HOME" },
+  { label: "About", value: "ABOUT" },
+  { label: "Departments", value: "DEPARTMENTS" },
+  { label: "Doctors", value: "DOCTORS" },
+  { label: "Blog", value: "BLOG" },
+  { label: "Contact", value: "CONTACT" },
+];
+
+const newsletterValidationSchema = object({
+  email: string()
+    .email("valid email is required.")
+    .required("Email is required."),
+});
+
+const FooterColumn = ({ title = "", items = [] }) => {
+  return (
+    <>
+      <div className="text-center">
+        <h4 className="mb-4 text-xl font-semibold">{title}</h4>
+        <ul className="space-y-2">
+          {items?.map((item, index) => (
+            <li key={index}>
+              <Link
+                href="/appointments"
+                className="hover:text-primary hover:underline"
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
+};
 
 const Footer = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: newsletterValidationSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
   return (
-    <footer className="relative bg-primary text-white">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src="/image/footer/footer-bg.jpg" // Replace with your image path in public folder
-          alt="Footer Background"
-          layout="fill"
-          objectFit="cover"
-          className="opacity-50"
-        />
-      </div>
-
-      {/* Footer Content */}
-      <div className="container relative z-10 mx-auto px-6 py-12 md:px-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* Remedic Section */}
-          <div>
-            <h4 className="mb-4 text-lg font-semibold">Remedic</h4>
-            <p className="mb-4 text-sm leading-relaxed">
-              Far far away, behind the word mountains, far from the countries
-              Vokalia and Consonantia, there live the blind texts.
-            </p>
-            <div className="flex space-x-4">
-              <a href="#" className="hover:opacity-75">
-                <i className="fab fa-twitter text-xl"></i>
-              </a>
-              <a href="#" className="hover:opacity-75">
-                <i className="fab fa-facebook text-xl"></i>
-              </a>
-              <a href="#" className="hover:opacity-75">
-                <i className="fab fa-instagram text-xl"></i>
-              </a>
+    <div className="bg-gray-100 py-10">
+      <Container>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          {/* LOGO */}
+          <div className="flex flex-col gap-8 border">
+            <Link className="block w-fit" href="/">
+              <Image
+                src={logo}
+                alt="telehealth logo"
+                className="w-auto cursor-pointer max-xs:h-5 xs:h-8 sm:h-10"
+                quality={100}
+                loading="eager"
+              />
+            </Link>
+            <div className="flex flex-col gap-3">
+              <p className="flex items-center gap-2">
+                <span className="rounded-full bg-primary bg-opacity-30 p-2 text-primary">
+                  <Phone className="size-5" />
+                </span>
+                <span className="font-semibold">+880 170 000 0000</span>
+              </p>
+              <p className="flex items-center gap-2">
+                <span className="rounded-full bg-primary bg-opacity-30 p-2 text-primary">
+                  <Mail className="size-5" />
+                </span>
+                <span className="font-semibold">support@teleheath.com.bd</span>
+              </p>
+              <p className="flex items-center gap-2">
+                <span className="rounded-full bg-primary bg-opacity-30 p-2 text-primary">
+                  <MapPin className="size-5" />
+                </span>
+                <span className="font-semibold">Dhaka, Bangladesh</span>
+              </p>
             </div>
           </div>
-
+          {/* <div className="block h-full w-[2px] bg-red-300"></div> */}
           {/* Information Section */}
-          <div>
-            <h4 className="mb-4 text-lg font-semibold">Information</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#" className="hover:underline">
-                  Appointments
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Our Specialties
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Why Choose Us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Our Services
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Health Tips
-                </a>
-              </li>
-            </ul>
-          </div>
-
+          <FooterColumn title="Information" items={infoList} />
           {/* Site Links Section */}
+          <FooterColumn title="Site Links" items={siteLinks} />
+          {/* News letter subscription */}
           <div>
-            <h4 className="mb-4 text-lg font-semibold">Site Links</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#" className="hover:underline">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Departments
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Doctors
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Section */}
-          <div>
-            <h4 className="mb-4 text-lg font-semibold">Have a Questions?</h4>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start space-x-3">
-                <span>
-                  <i className="fas fa-map-marker-alt text-xl"></i>
-                </span>
-                <span>
-                  203 Fake St. Mountain View, San Francisco, California, USA
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <span>
-                  <i className="fas fa-phone-alt text-xl"></i>
-                </span>
-                <span>+2 392 3929 210</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <span>
-                  <i className="fas fa-envelope text-xl"></i>
-                </span>
-                <span>info@yourdomain.com</span>
-              </li>
-            </ul>
+            <h4 className="mb-4 text-xl font-semibold">Newsletter</h4>
+            <form
+              onSubmit={formik.handleSubmit}
+              className="flex items-center gap-2"
+            >
+              <div>
+                <FormInput
+                  label=""
+                  name="email"
+                  placeholder="Enter the email"
+                  value={formik.values.email}
+                  formik={formik}
+                />
+              </div>
+              <Button htmlType="submit" type="primary">
+                Subscribe
+              </Button>
+            </form>
+            <div>
+              <p className="mt-5 text-sm">
+                Subscribe to our newsletter for the latest health tips, expert
+                advice, and special offers.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </Container>
+    </div>
   );
 };
 
